@@ -1,0 +1,8 @@
+public enum THEME
+{
+	WTTG1,
+	TWR,
+	WTTG2BETA,
+	WTTG2,
+	DEEPHUNTERS
+}

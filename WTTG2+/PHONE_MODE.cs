@@ -1,0 +1,9 @@
+public enum PHONE_MODE
+{
+	OFF,
+	RINGING,
+	IN_CALL,
+	LOCKED_SCREEN,
+	BUSY,
+	PREP_CALL
+}
