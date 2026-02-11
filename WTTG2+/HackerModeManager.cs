@@ -583,17 +583,22 @@ public class HackerModeManager : MonoBehaviour
 
 	public int GetScore(HACK_TYPE hax)
 	{
-		return hax switch
-		{
-			HACK_TYPE.STACKPUSHER => int.Parse(lookUp.stackPusherTop.text), 
-			HACK_TYPE.NODEHEXER => int.Parse(lookUp.nodeHexerTop.text), 
-			HACK_TYPE.DOSBLOCK => int.Parse(lookUp.dosBlockerTop.text), 
-			HACK_TYPE.CLOUDGRID => int.Parse(lookUp.cloudGridTop.text), 
-			_ => 0, 
-		};
-	}
+        switch (hax)
+        {
+            case HACK_TYPE.STACKPUSHER:
+                return int.Parse(lookUp.stackPusherTop.text);
+            case HACK_TYPE.NODEHEXER:
+                return int.Parse(lookUp.nodeHexerTop.text);
+            case HACK_TYPE.DOSBLOCK:
+                return int.Parse(lookUp.dosBlockerTop.text);
+            case HACK_TYPE.CLOUDGRID:
+                return int.Parse(lookUp.cloudGridTop.text);
+            default:
+                return 0;
+        }
+    }
 
-	public void SetScore(HACK_TYPE hax, int value)
+    public void SetScore(HACK_TYPE hax, int value)
 	{
 		switch (hax)
 		{

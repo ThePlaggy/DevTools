@@ -1,30 +1,32 @@
 using UnityEngine;
 
-namespace Colorful;
-
-[HelpURL("http://www.thomashourdel.com/colorful/doc/color-correction/vintage-fast.html")]
-[ExecuteInEditMode]
-[AddComponentMenu("Colorful FX/Color Correction/Vintage")]
-public class VintageFast : LookupFilter3D
+namespace Colorful
 {
-	public Vintage.InstragramFilter Filter;
 
-	protected Vintage.InstragramFilter m_CurrentFilter;
-
-	protected override void OnRenderImage(RenderTexture source, RenderTexture destination)
+	[HelpURL("http://www.thomashourdel.com/colorful/doc/color-correction/vintage-fast.html")]
+	[ExecuteInEditMode]
+	[AddComponentMenu("Colorful FX/Color Correction/Vintage")]
+	public class VintageFast : LookupFilter3D
 	{
-		if (Filter != m_CurrentFilter)
+		public Vintage.InstragramFilter Filter;
+
+		protected Vintage.InstragramFilter m_CurrentFilter;
+
+		protected override void OnRenderImage(RenderTexture source, RenderTexture destination)
 		{
-			m_CurrentFilter = Filter;
-			if (Filter == Vintage.InstragramFilter.None)
+			if (Filter != m_CurrentFilter)
 			{
-				LookupTexture = null;
+				m_CurrentFilter = Filter;
+				if (Filter == Vintage.InstragramFilter.None)
+				{
+					LookupTexture = null;
+				}
+				else
+				{
+					LookupTexture = Resources.Load<Texture2D>("InstagramFast/" + Filter);
+				}
 			}
-			else
-			{
-				LookupTexture = Resources.Load<Texture2D>("InstagramFast/" + Filter);
-			}
+			base.OnRenderImage(source, destination);
 		}
-		base.OnRenderImage(source, destination);
 	}
 }

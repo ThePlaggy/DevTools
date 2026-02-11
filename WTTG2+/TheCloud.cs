@@ -1133,19 +1133,26 @@ public class TheCloud : MonoBehaviour
 		{
 			return "ALWAYS";
 		}
-		return webSite.WindowTime switch
-		{
-			WEBSITE_WINDOW_TIME.FIRST_QUARTER => "00-15", 
-			WEBSITE_WINDOW_TIME.SECOND_QUARTER => "15-30", 
-			WEBSITE_WINDOW_TIME.THRID_QUARTER => "30-45", 
-			WEBSITE_WINDOW_TIME.FOURTH_QUARTER => "45-60", 
-			WEBSITE_WINDOW_TIME.FIRST_HALF => "00-30", 
-			WEBSITE_WINDOW_TIME.SECNOND_HALF => "30-60", 
-			_ => "ALWAYS", 
-		};
-	}
+        switch (webSite.WindowTime)
+        {
+            case WEBSITE_WINDOW_TIME.FIRST_QUARTER:
+                return "00-15";
+            case WEBSITE_WINDOW_TIME.SECOND_QUARTER:
+                return "15-30";
+            case WEBSITE_WINDOW_TIME.THRID_QUARTER:
+                return "30-45";
+            case WEBSITE_WINDOW_TIME.FOURTH_QUARTER:
+                return "45-60";
+            case WEBSITE_WINDOW_TIME.FIRST_HALF:
+                return "00-30";
+            case WEBSITE_WINDOW_TIME.SECNOND_HALF:
+                return "30-60";
+            default:
+                return "ALWAYS";
+        }
+    }
 
-	public void SpawnManipulatorIcon(float timeFor, ManipulatorHook.THE_MANIPULATOR mANIPULATOR, ManipulatorHook.MANIPULATOR_TYPE tYPE)
+    public void SpawnManipulatorIcon(float timeFor, ManipulatorHook.THE_MANIPULATOR mANIPULATOR, ManipulatorHook.MANIPULATOR_TYPE tYPE)
 	{
 		GameManager.AudioSlinger.PlaySound(CustomSoundLookUp.manipulator);
 		switch (mANIPULATOR)

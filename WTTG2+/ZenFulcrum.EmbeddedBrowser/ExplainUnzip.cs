@@ -1,33 +1,35 @@
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-[RequireComponent(typeof(Browser))]
-public class ExplainUnzip : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public void Start()
+
+	[RequireComponent(typeof(Browser))]
+	public class ExplainUnzip : MonoBehaviour
 	{
-		Browser browser = GetComponent<Browser>();
-		browser.onFetch += delegate(JSONNode data)
+		public void Start()
 		{
-			if ((int)data["status"] == 404)
+			Browser browser = GetComponent<Browser>();
+			browser.onFetch += delegate (JSONNode data)
 			{
-				browser.LoadHTML(Resources.Load<TextAsset>("ExplainUnzip").text);
-				if ((bool)HUDManager.Instance)
+				if ((int)data["status"] == 404)
 				{
-					HUDManager.Instance.Pause();
+					browser.LoadHTML(Resources.Load<TextAsset>("ExplainUnzip").text);
+					if ((bool)HUDManager.Instance)
+					{
+						HUDManager.Instance.Pause();
+					}
+					Time.timeScale = 1f;
 				}
-				Time.timeScale = 1f;
-			}
-		};
-		browser.onFetchError += delegate(JSONNode data)
-		{
-			if (data["error"] == "ERR_ABORTED")
+			};
+			browser.onFetchError += delegate (JSONNode data)
 			{
-				browser.QueuePageReplacer(delegate
+				if (data["error"] == "ERR_ABORTED")
 				{
-				}, 1f);
-			}
-		};
+					browser.QueuePageReplacer(delegate
+					{
+					}, 1f);
+				}
+			};
+		}
 	}
 }

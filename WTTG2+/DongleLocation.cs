@@ -8,15 +8,26 @@ public static class DongleLocation
 		BALCONY
 	}
 
-	public static Location GetCurrentDongleLocation()
-	{
-		return GameManager.ManagerSlinger.WifiManager.GetCurrentHotspot().gameObject.name switch
-		{
-			"WifiDongleHotspot1" => Location.WINDOW, 
-			"WifiDongleHotspot2" => Location.DESK, 
-			"WifiDongleHotspot3" => Location.BED, 
-			"WifiDongleHotspot4" => Location.BALCONY, 
-			_ => Location.DESK, 
-		};
-	}
+    public static Location GetCurrentDongleLocation()
+    {
+        string name = GameManager.ManagerSlinger
+            .WifiManager
+            .GetCurrentHotspot()
+            .gameObject
+            .name;
+
+        switch (name)
+        {
+            case "WifiDongleHotspot1":
+                return Location.WINDOW;
+            case "WifiDongleHotspot2":
+                return Location.DESK;
+            case "WifiDongleHotspot3":
+                return Location.BED;
+            case "WifiDongleHotspot4":
+                return Location.BALCONY;
+            default:
+                return Location.DESK;
+        }
+    }
 }

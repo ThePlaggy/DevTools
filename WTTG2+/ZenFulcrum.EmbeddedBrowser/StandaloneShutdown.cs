@@ -1,18 +1,20 @@
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-internal class StandaloneShutdown : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public void OnApplicationQuit()
-	{
-		BrowserNative.UnloadNative();
-	}
 
-	public static void Create()
+	internal class StandaloneShutdown : MonoBehaviour
 	{
-		GameObject gameObject = new GameObject("ZFB Shutdown");
-		gameObject.AddComponent<StandaloneShutdown>();
-		Object.DontDestroyOnLoad(gameObject);
+		public void OnApplicationQuit()
+		{
+			BrowserNative.UnloadNative();
+		}
+
+		public static void Create()
+		{
+			GameObject gameObject = new GameObject("ZFB Shutdown");
+			gameObject.AddComponent<StandaloneShutdown>();
+			Object.DontDestroyOnLoad(gameObject);
+		}
 	}
 }

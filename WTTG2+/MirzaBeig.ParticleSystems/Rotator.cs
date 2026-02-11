@@ -1,51 +1,53 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class Rotator : MonoBehaviour
+namespace MirzaBeig.ParticleSystems
 {
-	public Vector3 localRotationSpeed;
 
-	public Vector3 worldRotationSpeed;
-
-	public bool executeInEditMode;
-
-	public bool unscaledTime;
-
-	private void Awake()
+	public class Rotator : MonoBehaviour
 	{
-	}
+		public Vector3 localRotationSpeed;
 
-	private void Start()
-	{
-	}
+		public Vector3 worldRotationSpeed;
 
-	private void Update()
-	{
-		if (Application.isPlaying)
+		public bool executeInEditMode;
+
+		public bool unscaledTime;
+
+		private void Awake()
 		{
-			rotate();
 		}
-	}
 
-	private void OnRenderObject()
-	{
-		if (executeInEditMode && !Application.isPlaying)
+		private void Start()
 		{
-			rotate();
 		}
-	}
 
-	private void rotate()
-	{
-		float num = (unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime);
-		if (localRotationSpeed != Vector3.zero)
+		private void Update()
 		{
-			base.transform.Rotate(localRotationSpeed * num, Space.Self);
+			if (Application.isPlaying)
+			{
+				rotate();
+			}
 		}
-		if (worldRotationSpeed != Vector3.zero)
+
+		private void OnRenderObject()
 		{
-			base.transform.Rotate(worldRotationSpeed * num, Space.World);
+			if (executeInEditMode && !Application.isPlaying)
+			{
+				rotate();
+			}
+		}
+
+		private void rotate()
+		{
+			float num = (unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime);
+			if (localRotationSpeed != Vector3.zero)
+			{
+				base.transform.Rotate(localRotationSpeed * num, Space.Self);
+			}
+			if (worldRotationSpeed != Vector3.zero)
+			{
+				base.transform.Rotate(worldRotationSpeed * num, Space.World);
+			}
 		}
 	}
 }

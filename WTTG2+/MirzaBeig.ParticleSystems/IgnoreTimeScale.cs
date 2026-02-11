@@ -1,22 +1,24 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class IgnoreTimeScale : MonoBehaviour
+namespace MirzaBeig.ParticleSystems
 {
-	private ParticleSystem particleSystem;
 
-	private void Awake()
+	public class IgnoreTimeScale : MonoBehaviour
 	{
-	}
+		private ParticleSystem particleSystem;
 
-	private void Start()
-	{
-		particleSystem = GetComponent<ParticleSystem>();
-	}
+		private void Awake()
+		{
+		}
 
-	private void Update()
-	{
-		particleSystem.Simulate(Time.unscaledDeltaTime, withChildren: true, restart: false);
+		private void Start()
+		{
+			particleSystem = GetComponent<ParticleSystem>();
+		}
+
+		private void Update()
+		{
+			particleSystem.Simulate(Time.unscaledDeltaTime, withChildren: true, restart: false);
+		}
 	}
 }

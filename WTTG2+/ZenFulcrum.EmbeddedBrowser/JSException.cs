@@ -1,11 +1,13 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class JSException : Exception
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public JSException(string what)
-		: base(what)
+
+	public class JSException : Exception
 	{
+		public JSException(string what)
+			: base(what)
+		{
+		}
 	}
 }

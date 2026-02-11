@@ -1,14 +1,16 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public interface IPromiseTimer
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	IPromise WaitFor(float seconds);
 
-	IPromise WaitUntil(Func<TimeData, bool> predicate);
+	public interface IPromiseTimer
+	{
+		IPromise WaitFor(float seconds);
 
-	IPromise WaitWhile(Func<TimeData, bool> predicate);
+		IPromise WaitUntil(Func<TimeData, bool> predicate);
 
-	void Update(float deltaTime);
+		IPromise WaitWhile(Func<TimeData, bool> predicate);
+
+		void Update(float deltaTime);
+	}
 }

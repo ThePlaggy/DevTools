@@ -50,6 +50,8 @@ public class AssetBundleManager : MonoBehaviour
 
 	private static AssetBundle NOIRPLUS;
 
+	private static AssetBundle CHIPFLAKE;
+
 	public static List<BUNDLE> LoadedBundles = new List<BUNDLE>();
 
 	public static AssetBundleManager Ins;
@@ -93,7 +95,8 @@ public class AssetBundleManager : MonoBehaviour
 			HACKERMODE = AssetsManager.GetLoader(BUNDLE.HACKERMODE).myProps;
 			NASKO = AssetsManager.GetLoader(BUNDLE.NASKO).myProps;
 			GAME_THEMES = AssetsManager.GetLoader(BUNDLE.GAME_THEMES).myProps;
-			AssetBundlesLeftToLoad = 22;
+			CHIPFLAKE = AssetsManager.GetLoader(BUNDLE.GAME_THEMES).myProps;
+			AssetBundlesLeftToLoad = 23;
 			StartCoroutine(AssetUnpackingComplete());
 			StartCoroutine(LoadASoft());
 			StartCoroutine(LoadEvents());
@@ -117,7 +120,8 @@ public class AssetBundleManager : MonoBehaviour
 			StartCoroutine(LoadNoirPlus());
 			StartCoroutine(LoadHackerMode());
 			StartCoroutine(LoadNasko());
-		}
+            StartCoroutine(LoadChipflake());
+        }
 	}
 
 	private IEnumerator AssetUnpackingComplete()
@@ -937,7 +941,25 @@ public class AssetBundleManager : MonoBehaviour
 		AssetBundlesLeftToLoad--;
 	}
 
-	private IEnumerator LoadMenuThemes()
+    private IEnumerator LoadChipflake()
+    {
+        yield return LoadAssetAsync(CHIPFLAKE, "chipflake", delegate (GameObject result)
+        {
+            CustomObjectLookUp.chipflake = result;
+        });
+        yield return AFDManager.Ins.CreateAFDAsync(CHIPFLAKE, "wegsound", AFD_TYPE.COMPUTER, 0.5f, Loop: false, delegate (AudioFileDefinition result)
+        {
+            CustomSoundLookUp.wegsound = result;
+        });
+        yield return AFDManager.Ins.CreateAFDAsync(CHIPFLAKE, "spawnsound", AFD_TYPE.COMPUTER, 0.5f, Loop: false, delegate (AudioFileDefinition result)
+        {
+            CustomSoundLookUp.spawnsound = result;
+        });
+        Debug.Log("[AssetBundleManager] CHIPFLAKE unpacking completed");
+        AssetBundlesLeftToLoad--;
+    }
+
+    private IEnumerator LoadMenuThemes()
 	{
 		yield return LoadAssetAsync(MENU_THEMES, "WTTG2Scenery", delegate(GameObject result)
 		{

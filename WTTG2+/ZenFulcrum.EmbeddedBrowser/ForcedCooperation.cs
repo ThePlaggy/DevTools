@@ -1,32 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class ForcedCooperation : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public Transform whoWillComply;
 
-	public float howLongWillTheyComply;
-
-	public void Comply()
+	public class ForcedCooperation : MonoBehaviour
 	{
-		StartCoroutine(_Comply());
-	}
+		public Transform whoWillComply;
 
-	protected IEnumerator _Comply()
-	{
-		float t0 = Time.time;
-		do
+		public float howLongWillTheyComply;
+
+		public void Comply()
 		{
-			Vector3 pos = base.transform.InverseTransformPoint(whoWillComply.position);
-			if (pos.z > 0f)
-			{
-				pos.z = 0f;
-				whoWillComply.position = base.transform.TransformPoint(pos);
-			}
-			yield return null;
+			StartCoroutine(_Comply());
 		}
-		while (Time.time - t0 < howLongWillTheyComply);
+
+		protected IEnumerator _Comply()
+		{
+			float t0 = Time.time;
+			do
+			{
+				Vector3 pos = base.transform.InverseTransformPoint(whoWillComply.position);
+				if (pos.z > 0f)
+				{
+					pos.z = 0f;
+					whoWillComply.position = base.transform.TransformPoint(pos);
+				}
+				yield return null;
+			}
+			while (Time.time - t0 < howLongWillTheyComply);
+		}
 	}
 }

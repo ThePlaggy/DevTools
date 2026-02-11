@@ -76,17 +76,31 @@ public static class WifiInteractionManager
 	private static WifiNetworkDefinition GetDefinition(int id)
 	{
 		WifiNetworkDefinition wifiNetworkDefinition = null;
-		wifiNetworkDefinition = id switch
-		{
-			-4 => WiFiPoll.targetWifi, 
-			-3 => GetRandomWiFi(), 
-			-13 => GetRandomWiFiAlt(), 
-			-2 => GetRandomLocalWiFi(), 
-			-12 => GetRandomLocalWiFiAlt(), 
-			-1 => GetCurrentWiFi(), 
-			_ => GetWiFiByID(id), 
-		};
-		DOSTwitchIns = wifiNetworkDefinition.networkName;
+        switch (id)
+        {
+            case -4:
+                wifiNetworkDefinition = WiFiPoll.targetWifi;
+                break;
+            case -3:
+                wifiNetworkDefinition = GetRandomWiFi();
+                break;
+            case -13:
+                wifiNetworkDefinition = GetRandomWiFiAlt();
+                break;
+            case -2:
+                wifiNetworkDefinition = GetRandomLocalWiFi();
+                break;
+            case -12:
+                wifiNetworkDefinition = GetRandomLocalWiFiAlt();
+                break;
+            case -1:
+                wifiNetworkDefinition = GetCurrentWiFi();
+                break;
+            default:
+                wifiNetworkDefinition = GetWiFiByID(id);
+                break;
+        }
+        DOSTwitchIns = wifiNetworkDefinition.networkName;
 		return wifiNetworkDefinition;
 	}
 

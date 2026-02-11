@@ -5,20 +5,21 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public abstract class WebResources
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public struct Response
+
+	public abstract class WebResources
 	{
-		public int responseCode;
+		public struct Response
+		{
+			public int responseCode;
 
-		public string mimeType;
+			public string mimeType;
 
-		public byte[] data;
-	}
+			public byte[] data;
+		}
 
-	public static readonly Dictionary<string, string> extensionMimeTypes = new Dictionary<string, string>
+		public static readonly Dictionary<string, string> extensionMimeTypes = new Dictionary<string, string>
 	{
 		{ "css", "text/css" },
 		{ "gif", "image/gif" },
@@ -38,72 +39,73 @@ public abstract class WebResources
 		{ "*", "application/octet-stream" }
 	};
 
-	private readonly Regex matchDots = new Regex("\\.[2,]");
+		private readonly Regex matchDots = new Regex("\\.[2,]");
 
-	public virtual Response this[string url]
-	{
-		get
+		public virtual Response this[string url]
 		{
-			if (string.IsNullOrEmpty(url) || url[0] != '/')
+			get
 			{
-				return GetError("Invalid path");
-			}
-			if (url.IndexOf('?') >= 0)
-			{
-				url = url.Substring(0, url.IndexOf('?'));
-			}
-			if (url.IndexOf('#') >= 0)
-			{
-				url = url.Substring(0, url.IndexOf('#'));
-			}
-			string input = WWW.UnEscapeURL(url);
-			input = matchDots.Replace(input, ".");
-			Response result;
-			try
-			{
-				byte[] data = GetData(input);
-				if (data == null)
+				if (string.IsNullOrEmpty(url) || url[0] != '/')
 				{
-					result = GetError("Not found", 404);
+					return GetError("Invalid path");
 				}
-				else
+				if (url.IndexOf('?') >= 0)
 				{
-					string text = Path.GetExtension(input);
-					if (text.Length > 0)
-					{
-						text = text.Substring(1);
-					}
-					if (!extensionMimeTypes.TryGetValue(text, out var value))
-					{
-						value = extensionMimeTypes["*"];
-					}
-					result = new Response
-					{
-						mimeType = value,
-						data = data,
-						responseCode = 200
-					};
+					url = url.Substring(0, url.IndexOf('?'));
 				}
+				if (url.IndexOf('#') >= 0)
+				{
+					url = url.Substring(0, url.IndexOf('#'));
+				}
+				string input = WWW.UnEscapeURL(url);
+				input = matchDots.Replace(input, ".");
+				Response result;
+				try
+				{
+					byte[] data = GetData(input);
+					if (data == null)
+					{
+						result = GetError("Not found", 404);
+					}
+					else
+					{
+						string text = Path.GetExtension(input);
+						if (text.Length > 0)
+						{
+							text = text.Substring(1);
+						}
+						if (!extensionMimeTypes.TryGetValue(text, out var value))
+						{
+							value = extensionMimeTypes["*"];
+						}
+						result = new Response
+						{
+							mimeType = value,
+							data = data,
+							responseCode = 200
+						};
+					}
+				}
+				catch (Exception exception)
+				{
+					Debug.LogError("WebResources: Failed to fetch URL " + input);
+					Debug.LogException(exception);
+					result = GetError("Internal error");
+				}
+				return result;
 			}
-			catch (Exception exception)
-			{
-				Debug.LogError("WebResources: Failed to fetch URL " + input);
-				Debug.LogException(exception);
-				result = GetError("Internal error");
-			}
-			return result;
 		}
-	}
 
-	public abstract byte[] GetData(string path);
+		public abstract byte[] GetData(string path);
 
-	public Response GetError(string text, int status = 500)
-	{
-		return new Response
+		public Response GetError(string text, int status = 500)
 		{
-			data = Encoding.UTF8.GetBytes(text),
-			mimeType = "text/plain",
-			responseCode = status
-		};
+			return new Response
+			{
+				data = Encoding.UTF8.GetBytes(text),
+				mimeType = "text/plain",
+				responseCode = status
+			};
+		}
 	}
 }

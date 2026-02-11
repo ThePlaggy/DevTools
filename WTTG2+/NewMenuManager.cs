@@ -215,19 +215,24 @@ public class NewMenuManager : MonoBehaviour
 		GetTabBTN(currentTab).SetActive();
 	}
 
-	public GameObject GetTabGameObject(SidebarTabType type)
-	{
-		return type switch
-		{
-			SidebarTabType.CHALLENGES => ChallengesTab, 
-			SidebarTabType.TWITCH => TwitchTab, 
-			SidebarTabType.STATISTICS => StatisticsTab, 
-			SidebarTabType.CREDITS => CreditsTab, 
-			_ => ChallengesTab, 
-		};
-	}
+    public GameObject GetTabGameObject(SidebarTabType type)
+    {
+        switch (type)
+        {
+            case SidebarTabType.CHALLENGES:
+                return ChallengesTab;
+            case SidebarTabType.TWITCH:
+                return TwitchTab;
+            case SidebarTabType.STATISTICS:
+                return StatisticsTab;
+            case SidebarTabType.CREDITS:
+                return CreditsTab;
+            default:
+                return ChallengesTab;
+        }
+    }
 
-	public void NewGameAction()
+    public void NewGameAction()
 	{
 		CanvasGroup myCG = normalButtons.GetComponent<CanvasGroup>();
 		CanvasGroup myCG2 = diffSelectButtons.GetComponent<CanvasGroup>();

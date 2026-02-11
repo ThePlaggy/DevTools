@@ -1,32 +1,34 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class DestroyOnParticlesDead : ParticleSystems
+namespace MirzaBeig.ParticleSystems
 {
-	protected override void Awake()
-	{
-		base.Awake();
-	}
 
-	protected override void Start()
+	public class DestroyOnParticlesDead : ParticleSystems
 	{
-		base.Start();
-		base.onParticleSystemsDeadEvent += onParticleSystemsDead;
-	}
+		protected override void Awake()
+		{
+			base.Awake();
+		}
 
-	protected override void Update()
-	{
-		base.Update();
-	}
+		protected override void Start()
+		{
+			base.Start();
+			base.onParticleSystemsDeadEvent += onParticleSystemsDead;
+		}
 
-	protected override void LateUpdate()
-	{
-		base.LateUpdate();
-	}
+		protected override void Update()
+		{
+			base.Update();
+		}
 
-	private void onParticleSystemsDead()
-	{
-		Object.Destroy(base.gameObject);
+		protected override void LateUpdate()
+		{
+			base.LateUpdate();
+		}
+
+		private void onParticleSystemsDead()
+		{
+			Object.Destroy(base.gameObject);
+		}
 	}
 }

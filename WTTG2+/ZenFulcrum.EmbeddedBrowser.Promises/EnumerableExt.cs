@@ -1,39 +1,41 @@
 using System;
 using System.Collections.Generic;
 
-namespace ZenFulcrum.EmbeddedBrowser.Promises;
-
-public static class EnumerableExt
+namespace ZenFulcrum.EmbeddedBrowser.Promises
 {
-	public static IEnumerable<T> Empty<T>()
-	{
-		return new T[0];
-	}
 
-	public static IEnumerable<T> LazyEach<T>(this IEnumerable<T> source, Action<T> fn)
+	public static class EnumerableExt
 	{
-		foreach (T item in source)
+		public static IEnumerable<T> Empty<T>()
 		{
-			fn(item);
-			yield return item;
+			return new T[0];
 		}
-	}
 
-	public static void Each<T>(this IEnumerable<T> source, Action<T> fn)
-	{
-		foreach (T item in source)
+		public static IEnumerable<T> LazyEach<T>(this IEnumerable<T> source, Action<T> fn)
 		{
-			fn(item);
+			foreach (T item in source)
+			{
+				fn(item);
+				yield return item;
+			}
 		}
-	}
 
-	public static void Each<T>(this IEnumerable<T> source, Action<T, int> fn)
-	{
-		int num = 0;
-		foreach (T item in source)
+		public static void Each<T>(this IEnumerable<T> source, Action<T> fn)
 		{
-			fn(item, num);
-			num++;
+			foreach (T item in source)
+			{
+				fn(item);
+			}
+		}
+
+		public static void Each<T>(this IEnumerable<T> source, Action<T, int> fn)
+		{
+			int num = 0;
+			foreach (T item in source)
+			{
+				fn(item, num);
+				num++;
+			}
 		}
 	}
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Colorful;
+namespace Colorful { 
 
 [HelpURL("http://www.thomashourdel.com/colorful/doc/blur-effects/directional-blur.html")]
 [ExecuteInEditMode]
@@ -42,4 +42,5 @@ public class DirectionalBlur : BaseEffect
 	{
 		return "Hidden/Colorful/DirectionalBlur";
 	}
+}
 }

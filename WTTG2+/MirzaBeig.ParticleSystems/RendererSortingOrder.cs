@@ -1,23 +1,25 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-[ExecuteInEditMode]
-[RequireComponent(typeof(Renderer))]
-public class RendererSortingOrder : MonoBehaviour
+namespace MirzaBeig.ParticleSystems
 {
-	public int sortingOrder;
 
-	private void Awake()
+	[ExecuteInEditMode]
+	[RequireComponent(typeof(Renderer))]
+	public class RendererSortingOrder : MonoBehaviour
 	{
-	}
+		public int sortingOrder;
 
-	private void Start()
-	{
-		GetComponent<Renderer>().sortingOrder = sortingOrder;
-	}
+		private void Awake()
+		{
+		}
 
-	private void Update()
-	{
+		private void Start()
+		{
+			GetComponent<Renderer>().sortingOrder = sortingOrder;
+		}
+
+		private void Update()
+		{
+		}
 	}
 }

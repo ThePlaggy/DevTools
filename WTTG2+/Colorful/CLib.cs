@@ -1,26 +1,28 @@
 using System;
 using UnityEngine;
 
-namespace Colorful;
-
-public static class CLib
+namespace Colorful
 {
-	public const float PI_2 = (float)Math.PI / 2f;
 
-	public const float PI2 = (float)Math.PI * 2f;
-
-	public static float Frac(float f)
+	public static class CLib
 	{
-		return f - Mathf.Floor(f);
-	}
+		public const float PI_2 = (float)Math.PI / 2f;
 
-	public static bool IsLinearColorSpace()
-	{
-		return QualitySettings.activeColorSpace == ColorSpace.Linear;
-	}
+		public const float PI2 = (float)Math.PI * 2f;
 
-	public static bool Approximately(float source, float about, float range = 0.0001f)
-	{
-		return Mathf.Abs(source - about) < range;
+		public static float Frac(float f)
+		{
+			return f - Mathf.Floor(f);
+		}
+
+		public static bool IsLinearColorSpace()
+		{
+			return QualitySettings.activeColorSpace == ColorSpace.Linear;
+		}
+
+		public static bool Approximately(float source, float about, float range = 0.0001f)
+		{
+			return Mathf.Abs(source - about) < range;
+		}
 	}
 }

@@ -1,8 +1,10 @@
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public enum PromiseState
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	Pending,
-	Rejected,
-	Resolved
+
+	public enum PromiseState
+	{
+		Pending,
+		Rejected,
+		Resolved
+	}
 }

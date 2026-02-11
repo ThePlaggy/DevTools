@@ -1,10 +1,12 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public struct RejectHandler
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public Action<Exception> callback;
 
-	public IRejectable rejectable;
+	public struct RejectHandler
+	{
+		public Action<Exception> callback;
+
+		public IRejectable rejectable;
+	}
 }

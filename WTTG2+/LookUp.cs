@@ -10,7 +10,9 @@ public static class LookUp
 
 	private static Doors _doors;
 
-	public static DesktopUI DesktopUI
+    public static bool chipflakespawn;
+
+    public static DesktopUI DesktopUI
 	{
 		get
 		{

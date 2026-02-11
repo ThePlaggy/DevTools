@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Colorful;
+namespace Colorful { 
 
 [HelpURL("http://www.thomashourdel.com/colorful/doc/color-correction/shadows-midtones-highlights.html")]
 [ExecuteInEditMode]
@@ -49,4 +49,5 @@ public class ShadowsMidtonesHighlights : BaseEffect
 	{
 		return "Hidden/Colorful/Shadows Midtones Highlights";
 	}
+}
 }

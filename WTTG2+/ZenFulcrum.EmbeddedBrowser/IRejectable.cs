@@ -1,8 +1,10 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public interface IRejectable
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	void Reject(Exception ex);
+
+	public interface IRejectable
+	{
+		void Reject(Exception ex);
+	}
 }

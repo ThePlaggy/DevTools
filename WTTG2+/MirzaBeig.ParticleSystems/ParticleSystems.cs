@@ -1,126 +1,128 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class ParticleSystems : MonoBehaviour
+namespace MirzaBeig.ParticleSystems
 {
-	public delegate void onParticleSystemsDeadEventHandler();
 
-	public ParticleSystem[] particleSystems { get; set; }
-
-	public event onParticleSystemsDeadEventHandler onParticleSystemsDeadEvent;
-
-	protected virtual void Awake()
+	public class ParticleSystems : MonoBehaviour
 	{
-		particleSystems = GetComponentsInChildren<ParticleSystem>();
-	}
+		public delegate void onParticleSystemsDeadEventHandler();
 
-	protected virtual void Start()
-	{
-	}
+		public ParticleSystem[] particleSystems { get; set; }
 
-	protected virtual void Update()
-	{
-	}
+		public event onParticleSystemsDeadEventHandler onParticleSystemsDeadEvent;
 
-	protected virtual void LateUpdate()
-	{
-		if (this.onParticleSystemsDeadEvent != null && !isAlive())
+		protected virtual void Awake()
 		{
-			this.onParticleSystemsDeadEvent();
+			particleSystems = GetComponentsInChildren<ParticleSystem>();
 		}
-	}
 
-	public void reset()
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
+		protected virtual void Start()
 		{
-			particleSystems[i].time = 0f;
 		}
-	}
 
-	public void play()
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
+		protected virtual void Update()
 		{
-			particleSystems[i].Play(withChildren: false);
 		}
-	}
 
-	public void pause()
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
+		protected virtual void LateUpdate()
 		{
-			particleSystems[i].Pause(withChildren: false);
-		}
-	}
-
-	public void stop()
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
-		{
-			particleSystems[i].Stop(withChildren: false);
-		}
-	}
-
-	public void clear()
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
-		{
-			particleSystems[i].Clear(withChildren: false);
-		}
-	}
-
-	public void simulate(float time, bool reset = false)
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
-		{
-			particleSystems[i].Simulate(time, withChildren: false, reset);
-		}
-	}
-
-	public bool isAlive()
-	{
-		for (int i = 0; i < particleSystems.Length; i++)
-		{
-			if ((bool)particleSystems[i] && particleSystems[i].IsAlive())
+			if (this.onParticleSystemsDeadEvent != null && !isAlive())
 			{
-				return true;
+				this.onParticleSystemsDeadEvent();
 			}
 		}
-		return false;
-	}
 
-	public bool isPlaying(bool checkAll = false)
-	{
-		if (particleSystems.Length == 0)
+		public void reset()
 		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				particleSystems[i].time = 0f;
+			}
+		}
+
+		public void play()
+		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				particleSystems[i].Play(withChildren: false);
+			}
+		}
+
+		public void pause()
+		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				particleSystems[i].Pause(withChildren: false);
+			}
+		}
+
+		public void stop()
+		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				particleSystems[i].Stop(withChildren: false);
+			}
+		}
+
+		public void clear()
+		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				particleSystems[i].Clear(withChildren: false);
+			}
+		}
+
+		public void simulate(float time, bool reset = false)
+		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				particleSystems[i].Simulate(time, withChildren: false, reset);
+			}
+		}
+
+		public bool isAlive()
+		{
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				if ((bool)particleSystems[i] && particleSystems[i].IsAlive())
+				{
+					return true;
+				}
+			}
 			return false;
 		}
-		if (!checkAll)
+
+		public bool isPlaying(bool checkAll = false)
 		{
-			return particleSystems[0].isPlaying;
-		}
-		for (int i = 0; i < 0; i++)
-		{
-			if (!particleSystems[i].isPlaying)
+			if (particleSystems.Length == 0)
 			{
 				return false;
 			}
-		}
-		return true;
-	}
-
-	public int getParticleCount()
-	{
-		int num = 0;
-		for (int i = 0; i < particleSystems.Length; i++)
-		{
-			if ((bool)particleSystems[i])
+			if (!checkAll)
 			{
-				num += particleSystems[i].particleCount;
+				return particleSystems[0].isPlaying;
 			}
+			for (int i = 0; i < 0; i++)
+			{
+				if (!particleSystems[i].isPlaying)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
-		return num;
+
+		public int getParticleCount()
+		{
+			int num = 0;
+			for (int i = 0; i < particleSystems.Length; i++)
+			{
+				if ((bool)particleSystems[i])
+				{
+					num += particleSystems[i].particleCount;
+				}
+			}
+			return num;
+		}
 	}
 }

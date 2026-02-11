@@ -1,26 +1,28 @@
-namespace MirzaBeig.ParticleSystems;
-
-public class ParticleSystemsSimulationSpeed : ParticleSystems
+namespace MirzaBeig.ParticleSystems
 {
-	public float speed = 1f;
 
-	protected override void Awake()
+	public class ParticleSystemsSimulationSpeed : ParticleSystems
 	{
-		base.Awake();
-	}
+		public float speed = 1f;
 
-	protected override void Start()
-	{
-		base.Start();
-	}
+		protected override void Awake()
+		{
+			base.Awake();
+		}
 
-	protected override void Update()
-	{
-		base.Update();
-	}
+		protected override void Start()
+		{
+			base.Start();
+		}
 
-	protected override void LateUpdate()
-	{
-		base.LateUpdate();
+		protected override void Update()
+		{
+			base.Update();
+		}
+
+		protected override void LateUpdate()
+		{
+			base.LateUpdate();
+		}
 	}
 }

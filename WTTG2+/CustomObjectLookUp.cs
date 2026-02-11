@@ -141,4 +141,8 @@ public static class CustomObjectLookUp
 	public static GameObject KidnapperTitle;
 
 	public static GameObject WiFiRage;
+
+    public static GameObject chipflake;
+
+    public static GameObject chipflakeobj;
 }

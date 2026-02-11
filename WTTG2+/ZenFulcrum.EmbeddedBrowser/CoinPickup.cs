@@ -1,39 +1,41 @@
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class CoinPickup : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public float spinSpeed = 20f;
 
-	public bool isMassive;
-
-	private Transform coinVis;
-
-	public void Start()
+	public class CoinPickup : MonoBehaviour
 	{
-		coinVis = base.transform.Find("Vis");
-	}
+		public float spinSpeed = 20f;
 
-	public void Update()
-	{
-		coinVis.transform.rotation *= Quaternion.AngleAxis(Time.deltaTime * spinSpeed, Vector3.up);
-	}
+		public bool isMassive;
 
-	public void OnTriggerEnter(Collider other)
-	{
-		PlayerInventory component = other.GetComponent<PlayerInventory>();
-		if ((bool)component)
+		private Transform coinVis;
+
+		public void Start()
 		{
-			if (isMassive)
+			coinVis = base.transform.Find("Vis");
+		}
+
+		public void Update()
+		{
+			coinVis.transform.rotation *= Quaternion.AngleAxis(Time.deltaTime * spinSpeed, Vector3.up);
+		}
+
+		public void OnTriggerEnter(Collider other)
+		{
+			PlayerInventory component = other.GetComponent<PlayerInventory>();
+			if ((bool)component)
 			{
-				HUDManager.Instance.LoadBrowseLevel();
+				if (isMassive)
+				{
+					HUDManager.Instance.LoadBrowseLevel();
+				}
+				else
+				{
+					component.AddCoin();
+				}
+				Object.Destroy(base.gameObject);
 			}
-			else
-			{
-				component.AddCoin();
-			}
-			Object.Destroy(base.gameObject);
 		}
 	}
 }

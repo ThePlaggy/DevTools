@@ -1,53 +1,55 @@
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-[RequireComponent(typeof(Browser))]
-[RequireComponent(typeof(MeshCollider))]
-public class FPSBrowserUI : ClickMeshBrowserUI
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	protected FPSCursorRenderer cursorRenderer;
 
-	protected Transform worldPointer;
-
-	protected override Ray LookRay => new Ray(worldPointer.position, worldPointer.forward);
-
-	public void Start()
+	[RequireComponent(typeof(Browser))]
+	[RequireComponent(typeof(MeshCollider))]
+	public class FPSBrowserUI : ClickMeshBrowserUI
 	{
-		FPSCursorRenderer.SetUpBrowserInput(GetComponent<Browser>(), GetComponent<MeshCollider>());
-	}
+		protected FPSCursorRenderer cursorRenderer;
 
-	public static FPSBrowserUI Create(MeshCollider meshCollider, Transform worldPointer, FPSCursorRenderer cursorRenderer)
-	{
-		FPSBrowserUI fPSBrowserUI = meshCollider.gameObject.GetComponent<FPSBrowserUI>();
-		if (!fPSBrowserUI)
+		protected Transform worldPointer;
+
+		protected override Ray LookRay => new Ray(worldPointer.position, worldPointer.forward);
+
+		public void Start()
 		{
-			fPSBrowserUI = meshCollider.gameObject.AddComponent<FPSBrowserUI>();
+			FPSCursorRenderer.SetUpBrowserInput(GetComponent<Browser>(), GetComponent<MeshCollider>());
 		}
-		fPSBrowserUI.meshCollider = meshCollider;
-		fPSBrowserUI.worldPointer = worldPointer;
-		fPSBrowserUI.cursorRenderer = cursorRenderer;
-		return fPSBrowserUI;
-	}
 
-	protected override void SetCursor(BrowserCursor newCursor)
-	{
-		if (newCursor == null || base.MouseHasFocus)
+		public static FPSBrowserUI Create(MeshCollider meshCollider, Transform worldPointer, FPSCursorRenderer cursorRenderer)
 		{
-			cursorRenderer.SetCursor(newCursor, this);
+			FPSBrowserUI fPSBrowserUI = meshCollider.gameObject.GetComponent<FPSBrowserUI>();
+			if (!fPSBrowserUI)
+			{
+				fPSBrowserUI = meshCollider.gameObject.AddComponent<FPSBrowserUI>();
+			}
+			fPSBrowserUI.meshCollider = meshCollider;
+			fPSBrowserUI.worldPointer = worldPointer;
+			fPSBrowserUI.cursorRenderer = cursorRenderer;
+			return fPSBrowserUI;
 		}
-	}
 
-	public override void InputUpdate()
-	{
-		if (!cursorRenderer.EnableInput)
+		protected override void SetCursor(BrowserCursor newCursor)
 		{
-			base.MouseHasFocus = false;
-			base.KeyboardHasFocus = false;
+			if (newCursor == null || base.MouseHasFocus)
+			{
+				cursorRenderer.SetCursor(newCursor, this);
+			}
 		}
-		else
+
+		public override void InputUpdate()
 		{
-			base.InputUpdate();
+			if (!cursorRenderer.EnableInput)
+			{
+				base.MouseHasFocus = false;
+				base.KeyboardHasFocus = false;
+			}
+			else
+			{
+				base.InputUpdate();
+			}
 		}
 	}
 }

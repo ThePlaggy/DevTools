@@ -1,6 +1,8 @@
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public interface INewWindowHandler
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	Browser CreateBrowser(Browser parent);
+
+	public interface INewWindowHandler
+	{
+		Browser CreateBrowser(Browser parent);
+	}
 }

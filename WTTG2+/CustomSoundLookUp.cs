@@ -301,4 +301,8 @@ public static class CustomSoundLookUp
 	public static AudioFileDefinition booooom;
 
 	public static AudioClip harbinger;
+
+    public static AudioFileDefinition wegsound;
+
+    public static AudioFileDefinition spawnsound;
 }

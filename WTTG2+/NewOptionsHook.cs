@@ -140,16 +140,19 @@ public class NewOptionsHook : MonoBehaviour
 			properCodeMusicUpdate = false;
 			return;
 		}
-		TitleManager.Ins.UpdateMusic(num switch
-		{
-			0 => -2, 
-			7 => -1, 
-			6 => -3, 
-			_ => num - 1, 
-		});
-	}
+        int val;
+        switch (num)
+        {
+            case 0: val = -2; break;
+            case 7: val = -1; break;
+            case 6: val = -3; break;
+            default: val = num - 1; break;
+        }
 
-	private void SetSettings()
+        TitleManager.Ins.UpdateMusic(val);
+    }
+
+    private void SetSettings()
 	{
 		if (!PlayerPrefs.HasKey("[GAME]Quality"))
 		{

@@ -1,14 +1,16 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-internal class PredicateWait
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public IPendingPromise pendingPromise;
 
-	public Func<TimeData, bool> predicate;
+	internal class PredicateWait
+	{
+		public IPendingPromise pendingPromise;
 
-	public TimeData timeData;
+		public Func<TimeData, bool> predicate;
 
-	public float timeStarted;
+		public TimeData timeData;
+
+		public float timeStarted;
+	}
 }

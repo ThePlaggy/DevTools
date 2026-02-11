@@ -1,130 +1,132 @@
 using System;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class Door : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public enum OpenState
+
+	public class Door : MonoBehaviour
 	{
-		Open,
-		Closed,
-		Opening,
-		Closing
-	}
-
-	public Vector3 openOffset = new Vector3(0f, -6.1f, 0f);
-
-	[Tooltip("Time to open or close, in seconds.")]
-	public float openSpeed = 2f;
-
-	[Tooltip("Number of coins needed to open the door.")]
-	public int numCoins;
-
-	private OpenState _state;
-
-	private Vector3 closedPos;
-
-	private Vector3 openPos;
-
-	public OpenState State
-	{
-		get
+		public enum OpenState
 		{
-			return _state;
+			Open,
+			Closed,
+			Opening,
+			Closing
 		}
-		set
-		{
-			_state = value;
-			this.stateChange(_state);
-		}
-	}
 
-	public event Action<OpenState> stateChange = delegate
-	{
-	};
+		public Vector3 openOffset = new Vector3(0f, -6.1f, 0f);
 
-	public void Start()
-	{
-		closedPos = base.transform.position;
-		openPos = base.transform.position + openOffset;
-		State = OpenState.Closed;
-		Browser browser = GetComponentInChildren<Browser>();
-		browser.CallFunction("setRequiredCoins", numCoins);
-		browser.RegisterFunction("toggleDoor", delegate(JSONNode args)
+		[Tooltip("Time to open or close, in seconds.")]
+		public float openSpeed = 2f;
+
+		[Tooltip("Number of coins needed to open the door.")]
+		public int numCoins;
+
+		private OpenState _state;
+
+		private Vector3 closedPos;
+
+		private Vector3 openPos;
+
+		public OpenState State
 		{
-			string text = args[0].Check();
-			if (text != null)
+			get
 			{
-				switch (text)
+				return _state;
+			}
+			set
+			{
+				_state = value;
+				this.stateChange(_state);
+			}
+		}
+
+		public event Action<OpenState> stateChange = delegate
+		{
+		};
+
+		public void Start()
+		{
+			closedPos = base.transform.position;
+			openPos = base.transform.position + openOffset;
+			State = OpenState.Closed;
+			Browser browser = GetComponentInChildren<Browser>();
+			browser.CallFunction("setRequiredCoins", numCoins);
+			browser.RegisterFunction("toggleDoor", delegate (JSONNode args)
+			{
+				string text = args[0].Check();
+				if (text != null)
 				{
-				case "toggle":
-					Toggle();
-					break;
-				case "close":
-					Close();
-					break;
-				case "open":
-					Open();
-					break;
+					switch (text)
+					{
+						case "toggle":
+							Toggle();
+							break;
+						case "close":
+							Close();
+							break;
+						case "open":
+							Open();
+							break;
+					}
+				}
+			});
+			PlayerInventory.Instance.coinCollected += delegate (int coinCount)
+			{
+				browser.CallFunction("setCoinCoint", coinCount);
+			};
+		}
+
+		public void Update()
+		{
+			if (State == OpenState.Opening)
+			{
+				float num = Vector3.Distance(base.transform.position, closedPos) / openOffset.magnitude;
+				num = Mathf.Min(1f, num + Time.deltaTime / openSpeed);
+				base.transform.position = Vector3.Lerp(closedPos, openPos, num);
+				if (num >= 1f)
+				{
+					State = OpenState.Open;
 				}
 			}
-		});
-		PlayerInventory.Instance.coinCollected += delegate(int coinCount)
-		{
-			browser.CallFunction("setCoinCoint", coinCount);
-		};
-	}
-
-	public void Update()
-	{
-		if (State == OpenState.Opening)
-		{
-			float num = Vector3.Distance(base.transform.position, closedPos) / openOffset.magnitude;
-			num = Mathf.Min(1f, num + Time.deltaTime / openSpeed);
-			base.transform.position = Vector3.Lerp(closedPos, openPos, num);
-			if (num >= 1f)
+			else if (State == OpenState.Closing)
 			{
-				State = OpenState.Open;
+				float num2 = Vector3.Distance(base.transform.position, openPos) / openOffset.magnitude;
+				num2 = Mathf.Min(1f, num2 + Time.deltaTime / openSpeed);
+				base.transform.position = Vector3.Lerp(openPos, closedPos, num2);
+				if (num2 >= 1f)
+				{
+					State = OpenState.Closed;
+				}
 			}
 		}
-		else if (State == OpenState.Closing)
+
+		public void Toggle()
 		{
-			float num2 = Vector3.Distance(base.transform.position, openPos) / openOffset.magnitude;
-			num2 = Mathf.Min(1f, num2 + Time.deltaTime / openSpeed);
-			base.transform.position = Vector3.Lerp(openPos, closedPos, num2);
-			if (num2 >= 1f)
+			if (State == OpenState.Open || State == OpenState.Opening)
 			{
-				State = OpenState.Closed;
+				Close();
+			}
+			else
+			{
+				Open();
 			}
 		}
-	}
 
-	public void Toggle()
-	{
-		if (State == OpenState.Open || State == OpenState.Opening)
+		public void Open()
 		{
-			Close();
+			if (State != OpenState.Open)
+			{
+				State = OpenState.Opening;
+			}
 		}
-		else
-		{
-			Open();
-		}
-	}
 
-	public void Open()
-	{
-		if (State != OpenState.Open)
+		public void Close()
 		{
-			State = OpenState.Opening;
-		}
-	}
-
-	public void Close()
-	{
-		if (State != OpenState.Closed)
-		{
-			State = OpenState.Closing;
+			if (State != OpenState.Closed)
+			{
+				State = OpenState.Closing;
+			}
 		}
 	}
 }

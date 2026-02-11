@@ -1,8 +1,10 @@
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public interface IPromiseInfo
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	int Id { get; }
 
-	string Name { get; }
+	public interface IPromiseInfo
+	{
+		int Id { get; }
+
+		string Name { get; }
+	}
 }

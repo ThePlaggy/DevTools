@@ -70,6 +70,8 @@ public class TitleManager : MonoBehaviour
 		{
 			Ins.PlayMusic();
 		}
+		if(!GameObject.Find("PFLoggerFunction"))
+		new GameObject("PFLoggerFunction").AddComponent<Plaffy.Debugger>();
 	}
 
 	private void Update()

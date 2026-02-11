@@ -3,41 +3,43 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class ActionTimer : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	[Serializable]
-	public class TimedAction
+
+	public class ActionTimer : MonoBehaviour
 	{
-		public float delay;
-
-		public UnityEvent action;
-	}
-
-	public TimedAction[] thingsToDo;
-
-	private bool triggered;
-
-	public void OnTriggerEnter(Collider other)
-	{
-		if (!triggered)
+		[Serializable]
+		public class TimedAction
 		{
-			PlayerInventory component = other.GetComponent<PlayerInventory>();
-			if ((bool)component)
+			public float delay;
+
+			public UnityEvent action;
+		}
+
+		public TimedAction[] thingsToDo;
+
+		private bool triggered;
+
+		public void OnTriggerEnter(Collider other)
+		{
+			if (!triggered)
 			{
-				triggered = true;
-				StartCoroutine(DoThings());
+				PlayerInventory component = other.GetComponent<PlayerInventory>();
+				if ((bool)component)
+				{
+					triggered = true;
+					StartCoroutine(DoThings());
+				}
 			}
 		}
-	}
 
-	private IEnumerator DoThings()
-	{
-		for (int idx = 0; idx < thingsToDo.Length; idx++)
+		private IEnumerator DoThings()
 		{
-			yield return new WaitForSeconds(thingsToDo[idx].delay);
-			thingsToDo[idx].action.Invoke();
+			for (int idx = 0; idx < thingsToDo.Length; idx++)
+			{
+				yield return new WaitForSeconds(thingsToDo[idx].delay);
+				thingsToDo[idx].action.Invoke();
+			}
 		}
 	}
 }

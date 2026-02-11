@@ -1,25 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public interface IBrowserUI
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	bool MouseHasFocus { get; }
 
-	Vector2 MousePosition { get; }
+	public interface IBrowserUI
+	{
+		bool MouseHasFocus { get; }
 
-	MouseButton MouseButtons { get; }
+		Vector2 MousePosition { get; }
 
-	Vector2 MouseScroll { get; }
+		MouseButton MouseButtons { get; }
 
-	bool KeyboardHasFocus { get; }
+		Vector2 MouseScroll { get; }
 
-	List<Event> KeyEvents { get; }
+		bool KeyboardHasFocus { get; }
 
-	BrowserCursor BrowserCursor { get; }
+		List<Event> KeyEvents { get; }
 
-	BrowserInputSettings InputSettings { get; }
+		BrowserCursor BrowserCursor { get; }
 
-	void InputUpdate();
+		BrowserInputSettings InputSettings { get; }
+
+		void InputUpdate();
+	}
 }

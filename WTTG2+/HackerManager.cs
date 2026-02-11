@@ -170,16 +170,27 @@ public class HackerManager : MonoBehaviour
 
 	public string HackFreezeDebug => freezeAddTime + " : " + freezeTimeStamp;
 
-	public int GetChainLevel => HackerModeManager.currenthax switch
-	{
-		HACK_TYPE.STACKPUSHER => stackPusherHack.HackerModeSetSkill(), 
-		HACK_TYPE.NODEHEXER => nodeHexerHack.HackerModeSetSkill(), 
-		HACK_TYPE.DOSBLOCK => myDosAttack.HackerModeSetSkill(), 
-		HACK_TYPE.CLOUDGRID => myVapeAttack.HackerModeSetSkill(), 
-		_ => 0, 
-	};
+    public int GetChainLevel
+    {
+        get
+        {
+            switch (HackerModeManager.currenthax)
+            {
+                case HACK_TYPE.STACKPUSHER:
+                    return stackPusherHack.HackerModeSetSkill();
+                case HACK_TYPE.NODEHEXER:
+                    return nodeHexerHack.HackerModeSetSkill();
+                case HACK_TYPE.DOSBLOCK:
+                    return myDosAttack.HackerModeSetSkill();
+                case HACK_TYPE.CLOUDGRID:
+                    return myVapeAttack.HackerModeSetSkill();
+                default:
+                    return 0;
+            }
+        }
+    }
 
-	public List<StackPusherLevelDefinition> StackPusherLevelRef => stackPusherHack.StackPusherLevels;
+    public List<StackPusherLevelDefinition> StackPusherLevelRef => stackPusherHack.StackPusherLevels;
 
 	public List<NodeHexerLevelDefinition> NodeHexerLevelRef => nodeHexerHack.NodeHexerLevels;
 

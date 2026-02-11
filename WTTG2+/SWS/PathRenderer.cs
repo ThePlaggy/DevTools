@@ -2,88 +2,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SWS;
-
-[RequireComponent(typeof(LineRenderer))]
-public class PathRenderer : MonoBehaviour
+namespace SWS
 {
-	public bool onUpdate;
 
-	public float spacing = 0.05f;
-
-	private LineRenderer line;
-
-	private PathManager path;
-
-	private Vector3[] points;
-
-	private void Start()
+	[RequireComponent(typeof(LineRenderer))]
+	public class PathRenderer : MonoBehaviour
 	{
-		line = GetComponent<LineRenderer>();
-		path = GetComponent<PathManager>();
-		if ((bool)path)
-		{
-			StartCoroutine("StartRenderer");
-		}
-	}
+		public bool onUpdate;
 
-	private IEnumerator StartRenderer()
-	{
-		Render();
-		if (!onUpdate)
+		public float spacing = 0.05f;
+
+		private LineRenderer line;
+
+		private PathManager path;
+
+		private Vector3[] points;
+
+		private void Start()
 		{
-			yield break;
+			line = GetComponent<LineRenderer>();
+			path = GetComponent<PathManager>();
+			if ((bool)path)
+			{
+				StartCoroutine("StartRenderer");
+			}
 		}
-		while (true)
+
+		private IEnumerator StartRenderer()
 		{
-			yield return null;
 			Render();
+			if (!onUpdate)
+			{
+				yield break;
+			}
+			while (true)
+			{
+				yield return null;
+				Render();
+			}
 		}
-	}
 
-	private void Render()
-	{
-		spacing = Mathf.Clamp01(spacing);
-		if (spacing == 0f)
+		private void Render()
 		{
-			spacing = 0.05f;
+			spacing = Mathf.Clamp01(spacing);
+			if (spacing == 0f)
+			{
+				spacing = 0.05f;
+			}
+			List<Vector3> list = new List<Vector3>();
+			list.AddRange(path.GetPathPoints());
+			if (path.drawCurved)
+			{
+				list.Insert(0, list[0]);
+				list.Add(list[list.Count - 1]);
+				points = list.ToArray();
+				DrawCurved();
+			}
+			else
+			{
+				points = list.ToArray();
+				DrawLinear();
+			}
 		}
-		List<Vector3> list = new List<Vector3>();
-		list.AddRange(path.GetPathPoints());
-		if (path.drawCurved)
-		{
-			list.Insert(0, list[0]);
-			list.Add(list[list.Count - 1]);
-			points = list.ToArray();
-			DrawCurved();
-		}
-		else
-		{
-			points = list.ToArray();
-			DrawLinear();
-		}
-	}
 
-	private void DrawCurved()
-	{
-		int num = Mathf.RoundToInt(1f / spacing) + 1;
-		line.positionCount = num;
-		float num2 = 0f;
-		for (int i = 0; i < num; i++)
+		private void DrawCurved()
 		{
-			line.SetPosition(i, WaypointManager.GetPoint(points, num2));
-			num2 += spacing;
+			int num = Mathf.RoundToInt(1f / spacing) + 1;
+			line.positionCount = num;
+			float num2 = 0f;
+			for (int i = 0; i < num; i++)
+			{
+				line.SetPosition(i, WaypointManager.GetPoint(points, num2));
+				num2 += spacing;
+			}
 		}
-	}
 
-	private void DrawLinear()
-	{
-		line.positionCount = points.Length;
-		float num = 0f;
-		for (int i = 0; i < points.Length; i++)
+		private void DrawLinear()
 		{
-			line.SetPosition(i, points[i]);
-			num += spacing;
+			line.positionCount = points.Length;
+			float num = 0f;
+			for (int i = 0; i < points.Length; i++)
+			{
+				line.SetPosition(i, points[i]);
+				num += spacing;
+			}
 		}
 	}
 }

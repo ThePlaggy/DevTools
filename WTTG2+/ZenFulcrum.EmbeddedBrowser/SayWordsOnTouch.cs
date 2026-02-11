@@ -2,81 +2,83 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class SayWordsOnTouch : MonoBehaviour
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	[Serializable]
-	public class Verse
+
+	public class SayWordsOnTouch : MonoBehaviour
 	{
-		public float delay;
-
-		[Multiline]
-		public string textHTML;
-
-		public float dwellTime = 5f;
-	}
-
-	public Verse[] thingsToSay;
-
-	public float extraLeaveRange;
-
-	private bool stillTriggered;
-
-	private bool triggered;
-
-	public static int ActiveSpeakers { get; private set; }
-
-	public void OnTriggerEnter(Collider other)
-	{
-		if (triggered)
+		[Serializable]
+		public class Verse
 		{
-			return;
+			public float delay;
+
+			[Multiline]
+			public string textHTML;
+
+			public float dwellTime = 5f;
 		}
-		PlayerInventory component = other.GetComponent<PlayerInventory>();
-		if ((bool)component)
+
+		public Verse[] thingsToSay;
+
+		public float extraLeaveRange;
+
+		private bool stillTriggered;
+
+		private bool triggered;
+
+		public static int ActiveSpeakers { get; private set; }
+
+		public void OnTriggerEnter(Collider other)
 		{
-			triggered = true;
-			stillTriggered = true;
-			ActiveSpeakers++;
-			StartCoroutine(SayStuff());
-			BoxCollider component2 = GetComponent<BoxCollider>();
-			if ((bool)component2)
+			if (triggered)
 			{
-				Vector3 size = component2.size;
-				size.x += extraLeaveRange * 2f;
-				size.y += extraLeaveRange * 2f;
-				size.z += extraLeaveRange * 2f;
-				component2.size = size;
+				return;
+			}
+			PlayerInventory component = other.GetComponent<PlayerInventory>();
+			if ((bool)component)
+			{
+				triggered = true;
+				stillTriggered = true;
+				ActiveSpeakers++;
+				StartCoroutine(SayStuff());
+				BoxCollider component2 = GetComponent<BoxCollider>();
+				if ((bool)component2)
+				{
+					Vector3 size = component2.size;
+					size.x += extraLeaveRange * 2f;
+					size.y += extraLeaveRange * 2f;
+					size.z += extraLeaveRange * 2f;
+					component2.size = size;
+				}
 			}
 		}
-	}
 
-	public void OnTriggerExit(Collider other)
-	{
-		PlayerInventory component = other.GetComponent<PlayerInventory>();
-		if ((bool)component)
+		public void OnTriggerExit(Collider other)
 		{
-			stillTriggered = false;
+			PlayerInventory component = other.GetComponent<PlayerInventory>();
+			if ((bool)component)
+			{
+				stillTriggered = false;
+			}
 		}
-	}
 
-	private IEnumerator SayStuff()
-	{
-		for (int idx = 0; idx < thingsToSay.Length; idx++)
+		private IEnumerator SayStuff()
 		{
-			if (!stillTriggered)
+			for (int idx = 0; idx < thingsToSay.Length; idx++)
 			{
-				break;
+				if (!stillTriggered)
+				{
+					break;
+				}
+				yield return new WaitForSeconds(thingsToSay[idx].delay);
+				if (!stillTriggered)
+				{
+					break;
+				}
+				HUDManager.Instance.Say(thingsToSay[idx].textHTML, thingsToSay[idx].dwellTime);
 			}
-			yield return new WaitForSeconds(thingsToSay[idx].delay);
-			if (!stillTriggered)
-			{
-				break;
-			}
-			HUDManager.Instance.Say(thingsToSay[idx].textHTML, thingsToSay[idx].dwellTime);
+			ActiveSpeakers--;
+			UnityEngine.Object.Destroy(base.gameObject);
 		}
-		ActiveSpeakers--;
-		UnityEngine.Object.Destroy(base.gameObject);
 	}
 }

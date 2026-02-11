@@ -477,20 +477,41 @@ public class WifiManager : MonoBehaviour
 		}
 	}
 
-	private int getMinuteWearoutForSignal()
-	{
-		return currentWifiNetwork.networkSignal switch
-		{
-			WIFI_SIGNAL_TYPE.W80211B => (InventoryManager.WifiDongleLevel == 2) ? 5 : ((InventoryManager.WifiDongleLevel == 1) ? 10 : 15), 
-			WIFI_SIGNAL_TYPE.W80211BP => (InventoryManager.WifiDongleLevel == 2) ? 4 : ((InventoryManager.WifiDongleLevel == 1) ? 7 : 10), 
-			WIFI_SIGNAL_TYPE.W80211G => (InventoryManager.WifiDongleLevel == 2) ? 3 : ((InventoryManager.WifiDongleLevel == 1) ? 5 : 7), 
-			WIFI_SIGNAL_TYPE.W80211N => (InventoryManager.WifiDongleLevel == 2) ? 2 : ((InventoryManager.WifiDongleLevel == 1) ? 3 : 5), 
-			WIFI_SIGNAL_TYPE.W80211AC => (InventoryManager.WifiDongleLevel == 2) ? 1 : ((InventoryManager.WifiDongleLevel == 1) ? 2 : 3), 
-			_ => 0, 
-		};
-	}
+    private int getMinuteWearoutForSignal()
+    {
+        switch (currentWifiNetwork.networkSignal)
+        {
+            case WIFI_SIGNAL_TYPE.W80211B:
+                if (InventoryManager.WifiDongleLevel == 2) return 5;
+                if (InventoryManager.WifiDongleLevel == 1) return 10;
+                return 15;
 
-	public float GenereatePageLoadingTime()
+            case WIFI_SIGNAL_TYPE.W80211BP:
+                if (InventoryManager.WifiDongleLevel == 2) return 4;
+                if (InventoryManager.WifiDongleLevel == 1) return 7;
+                return 10;
+
+            case WIFI_SIGNAL_TYPE.W80211G:
+                if (InventoryManager.WifiDongleLevel == 2) return 3;
+                if (InventoryManager.WifiDongleLevel == 1) return 5;
+                return 7;
+
+            case WIFI_SIGNAL_TYPE.W80211N:
+                if (InventoryManager.WifiDongleLevel == 2) return 2;
+                if (InventoryManager.WifiDongleLevel == 1) return 3;
+                return 5;
+
+            case WIFI_SIGNAL_TYPE.W80211AC:
+                if (InventoryManager.WifiDongleLevel == 2) return 1;
+                if (InventoryManager.WifiDongleLevel == 1) return 2;
+                return 3;
+
+            default:
+                return 0;
+        }
+    }
+
+    public float GenereatePageLoadingTime()
 	{
 		int num = (int)(currentWifiNetwork.howLongConnected / 50f);
 		int num2 = ((num > 0) ? (num / 60 * getMinuteWearoutForSignal()) : 0);

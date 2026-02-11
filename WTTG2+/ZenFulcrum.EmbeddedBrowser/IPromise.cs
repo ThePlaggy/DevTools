@@ -2,82 +2,84 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public interface IPromise
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	IPromise WithName(string name);
 
-	void Done(Action onResolved, Action<Exception> onRejected);
+	public interface IPromise
+	{
+		IPromise WithName(string name);
 
-	void Done(Action onResolved);
+		void Done(Action onResolved, Action<Exception> onRejected);
 
-	void Done();
+		void Done(Action onResolved);
 
-	IPromise Catch(Action<Exception> onRejected);
+		void Done();
 
-	IPromise<ConvertedT> Then<ConvertedT>(Func<IPromise<ConvertedT>> onResolved);
+		IPromise Catch(Action<Exception> onRejected);
 
-	IPromise Then(Func<IPromise> onResolved);
+		IPromise<ConvertedT> Then<ConvertedT>(Func<IPromise<ConvertedT>> onResolved);
 
-	IPromise Then(Action onResolved);
+		IPromise Then(Func<IPromise> onResolved);
 
-	IPromise<ConvertedT> Then<ConvertedT>(Func<IPromise<ConvertedT>> onResolved, Action<Exception> onRejected);
+		IPromise Then(Action onResolved);
 
-	IPromise Then(Func<IPromise> onResolved, Action<Exception> onRejected);
+		IPromise<ConvertedT> Then<ConvertedT>(Func<IPromise<ConvertedT>> onResolved, Action<Exception> onRejected);
 
-	IPromise Then(Action onResolved, Action<Exception> onRejected);
+		IPromise Then(Func<IPromise> onResolved, Action<Exception> onRejected);
 
-	IPromise ThenAll(Func<IEnumerable<IPromise>> chain);
+		IPromise Then(Action onResolved, Action<Exception> onRejected);
 
-	IPromise<IEnumerable<ConvertedT>> ThenAll<ConvertedT>(Func<IEnumerable<IPromise<ConvertedT>>> chain);
+		IPromise ThenAll(Func<IEnumerable<IPromise>> chain);
 
-	IPromise ThenSequence(Func<IEnumerable<Func<IPromise>>> chain);
+		IPromise<IEnumerable<ConvertedT>> ThenAll<ConvertedT>(Func<IEnumerable<IPromise<ConvertedT>>> chain);
 
-	IPromise ThenRace(Func<IEnumerable<IPromise>> chain);
+		IPromise ThenSequence(Func<IEnumerable<Func<IPromise>>> chain);
 
-	IPromise<ConvertedT> ThenRace<ConvertedT>(Func<IEnumerable<IPromise<ConvertedT>>> chain);
+		IPromise ThenRace(Func<IEnumerable<IPromise>> chain);
 
-	IEnumerator ToWaitFor(bool abortOnFail = false);
-}
-public interface IPromise<PromisedT>
-{
-	PromisedT Value { get; }
+		IPromise<ConvertedT> ThenRace<ConvertedT>(Func<IEnumerable<IPromise<ConvertedT>>> chain);
 
-	IPromise<PromisedT> WithName(string name);
+		IEnumerator ToWaitFor(bool abortOnFail = false);
+	}
+	public interface IPromise<PromisedT>
+	{
+		PromisedT Value { get; }
 
-	void Done(Action<PromisedT> onResolved, Action<Exception> onRejected);
+		IPromise<PromisedT> WithName(string name);
 
-	void Done(Action<PromisedT> onResolved);
+		void Done(Action<PromisedT> onResolved, Action<Exception> onRejected);
 
-	void Done();
+		void Done(Action<PromisedT> onResolved);
 
-	IPromise<PromisedT> Catch(Action<Exception> onRejected);
+		void Done();
 
-	IPromise<ConvertedT> Then<ConvertedT>(Func<PromisedT, IPromise<ConvertedT>> onResolved);
+		IPromise<PromisedT> Catch(Action<Exception> onRejected);
 
-	IPromise Then(Func<PromisedT, IPromise> onResolved);
+		IPromise<ConvertedT> Then<ConvertedT>(Func<PromisedT, IPromise<ConvertedT>> onResolved);
 
-	IPromise<PromisedT> Then(Action<PromisedT> onResolved);
+		IPromise Then(Func<PromisedT, IPromise> onResolved);
 
-	IPromise<ConvertedT> Then<ConvertedT>(Func<PromisedT, IPromise<ConvertedT>> onResolved, Action<Exception> onRejected);
+		IPromise<PromisedT> Then(Action<PromisedT> onResolved);
 
-	IPromise Then(Func<PromisedT, IPromise> onResolved, Action<Exception> onRejected);
+		IPromise<ConvertedT> Then<ConvertedT>(Func<PromisedT, IPromise<ConvertedT>> onResolved, Action<Exception> onRejected);
 
-	IPromise<PromisedT> Then(Action<PromisedT> onResolved, Action<Exception> onRejected);
+		IPromise Then(Func<PromisedT, IPromise> onResolved, Action<Exception> onRejected);
 
-	IPromise<ConvertedT> Then<ConvertedT>(Func<PromisedT, ConvertedT> transform);
+		IPromise<PromisedT> Then(Action<PromisedT> onResolved, Action<Exception> onRejected);
 
-	[Obsolete("Use Then instead")]
-	IPromise<ConvertedT> Transform<ConvertedT>(Func<PromisedT, ConvertedT> transform);
+		IPromise<ConvertedT> Then<ConvertedT>(Func<PromisedT, ConvertedT> transform);
 
-	IPromise<IEnumerable<ConvertedT>> ThenAll<ConvertedT>(Func<PromisedT, IEnumerable<IPromise<ConvertedT>>> chain);
+		[Obsolete("Use Then instead")]
+		IPromise<ConvertedT> Transform<ConvertedT>(Func<PromisedT, ConvertedT> transform);
 
-	IPromise ThenAll(Func<PromisedT, IEnumerable<IPromise>> chain);
+		IPromise<IEnumerable<ConvertedT>> ThenAll<ConvertedT>(Func<PromisedT, IEnumerable<IPromise<ConvertedT>>> chain);
 
-	IPromise<ConvertedT> ThenRace<ConvertedT>(Func<PromisedT, IEnumerable<IPromise<ConvertedT>>> chain);
+		IPromise ThenAll(Func<PromisedT, IEnumerable<IPromise>> chain);
 
-	IPromise ThenRace(Func<PromisedT, IEnumerable<IPromise>> chain);
+		IPromise<ConvertedT> ThenRace<ConvertedT>(Func<PromisedT, IEnumerable<IPromise<ConvertedT>>> chain);
 
-	IEnumerator ToWaitFor(bool abortOnFail = false);
+		IPromise ThenRace(Func<PromisedT, IEnumerable<IPromise>> chain);
+
+		IEnumerator ToWaitFor(bool abortOnFail = false);
+	}
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
+namespace MirzaBeig.ParticleSystems { 
 
 [RequireComponent(typeof(Light))]
 public class AnimatedLight : MonoBehaviour
@@ -85,4 +85,5 @@ public class AnimatedLight : MonoBehaviour
 		light.color = startColour * colourOverLifetime.Evaluate(0f);
 		light.intensity = startIntensity * intensityOverLifetime.Evaluate(0f);
 	}
+}
 }

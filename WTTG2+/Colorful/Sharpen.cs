@@ -1,42 +1,44 @@
 using UnityEngine;
 
-namespace Colorful;
-
-[HelpURL("http://www.thomashourdel.com/colorful/doc/other-effects/sharpen.html")]
-[ExecuteInEditMode]
-[AddComponentMenu("Colorful FX/Other Effects/Sharpen")]
-public class Sharpen : BaseEffect
+namespace Colorful
 {
-	public enum Algorithm
+
+	[HelpURL("http://www.thomashourdel.com/colorful/doc/other-effects/sharpen.html")]
+	[ExecuteInEditMode]
+	[AddComponentMenu("Colorful FX/Other Effects/Sharpen")]
+	public class Sharpen : BaseEffect
 	{
-		TypeA,
-		TypeB
-	}
-
-	[Tooltip("Sharpening algorithm to use.")]
-	public Algorithm Mode = Algorithm.TypeB;
-
-	[Range(0f, 5f)]
-	[Tooltip("Sharpening Strength.")]
-	public float Strength = 0.6f;
-
-	[Range(0f, 1f)]
-	[Tooltip("Limits the amount of sharpening a pixel will receive.")]
-	public float Clamp = 0.05f;
-
-	protected override void OnRenderImage(RenderTexture source, RenderTexture destination)
-	{
-		if (Strength == 0f || Clamp == 0f)
+		public enum Algorithm
 		{
-			Graphics.Blit(source, destination);
-			return;
+			TypeA,
+			TypeB
 		}
-		base.Material.SetVector("_Params", new Vector4(Strength, Clamp, 1f / (float)source.width, 1f / (float)source.height));
-		Graphics.Blit(source, destination, base.Material, (int)Mode);
-	}
 
-	protected override string GetShaderName()
-	{
-		return "Hidden/Colorful/Sharpen";
+		[Tooltip("Sharpening algorithm to use.")]
+		public Algorithm Mode = Algorithm.TypeB;
+
+		[Range(0f, 5f)]
+		[Tooltip("Sharpening Strength.")]
+		public float Strength = 0.6f;
+
+		[Range(0f, 1f)]
+		[Tooltip("Limits the amount of sharpening a pixel will receive.")]
+		public float Clamp = 0.05f;
+
+		protected override void OnRenderImage(RenderTexture source, RenderTexture destination)
+		{
+			if (Strength == 0f || Clamp == 0f)
+			{
+				Graphics.Blit(source, destination);
+				return;
+			}
+			base.Material.SetVector("_Params", new Vector4(Strength, Clamp, 1f / (float)source.width, 1f / (float)source.height));
+			Graphics.Blit(source, destination, base.Material, (int)Mode);
+		}
+
+		protected override string GetShaderName()
+		{
+			return "Hidden/Colorful/Sharpen";
+		}
 	}
 }

@@ -1,72 +1,74 @@
 using UnityEngine;
 
-namespace MirzaBeig.Scripting.Effects;
-
-public class AttractionParticleAffector : ParticleAffector
+namespace MirzaBeig.Scripting.Effects
 {
-	[Header("Affector Controls")]
-	public float arrivalRadius = 1f;
 
-	public float arrivedRadius = 0.5f;
-
-	private float arrivalRadiusSqr;
-
-	private float arrivedRadiusSqr;
-
-	protected override void Awake()
+	public class AttractionParticleAffector : ParticleAffector
 	{
-		base.Awake();
-	}
+		[Header("Affector Controls")]
+		public float arrivalRadius = 1f;
 
-	protected override void Start()
-	{
-		base.Start();
-	}
+		public float arrivedRadius = 0.5f;
 
-	protected override void Update()
-	{
-		base.Update();
-	}
+		private float arrivalRadiusSqr;
 
-	protected override void LateUpdate()
-	{
-		float x = base.transform.lossyScale.x;
-		arrivalRadiusSqr = arrivalRadius * arrivalRadius * x;
-		arrivedRadiusSqr = arrivedRadius * arrivedRadius * x;
-		base.LateUpdate();
-	}
+		private float arrivedRadiusSqr;
 
-	protected override void OnDrawGizmosSelected()
-	{
-		if (base.enabled)
+		protected override void Awake()
 		{
-			base.OnDrawGizmosSelected();
+			base.Awake();
+		}
+
+		protected override void Start()
+		{
+			base.Start();
+		}
+
+		protected override void Update()
+		{
+			base.Update();
+		}
+
+		protected override void LateUpdate()
+		{
 			float x = base.transform.lossyScale.x;
-			float num = arrivalRadius * x;
-			float num2 = arrivedRadius * x;
-			Vector3 center = base.transform.position + offset;
-			Gizmos.color = Color.yellow;
-			Gizmos.DrawWireSphere(center, num);
-			Gizmos.color = Color.red;
-			Gizmos.DrawWireSphere(center, num2);
+			arrivalRadiusSqr = arrivalRadius * arrivalRadius * x;
+			arrivedRadiusSqr = arrivedRadius * arrivedRadius * x;
+			base.LateUpdate();
 		}
-	}
 
-	protected override Vector3 GetForce()
-	{
-		if (parameters.distanceToAffectorCenterSqr < arrivedRadiusSqr)
+		protected override void OnDrawGizmosSelected()
 		{
-			Vector3 result = default(Vector3);
-			result.x = 0f;
-			result.y = 0f;
-			result.z = 0f;
-			return result;
+			if (base.enabled)
+			{
+				base.OnDrawGizmosSelected();
+				float x = base.transform.lossyScale.x;
+				float num = arrivalRadius * x;
+				float num2 = arrivedRadius * x;
+				Vector3 center = base.transform.position + offset;
+				Gizmos.color = Color.yellow;
+				Gizmos.DrawWireSphere(center, num);
+				Gizmos.color = Color.red;
+				Gizmos.DrawWireSphere(center, num2);
+			}
 		}
-		if (parameters.distanceToAffectorCenterSqr < arrivalRadiusSqr)
+
+		protected override Vector3 GetForce()
 		{
-			float num = 1f - parameters.distanceToAffectorCenterSqr / arrivalRadiusSqr;
-			return Vector3.Normalize(parameters.scaledDirectionToAffectorCenter) * num;
+			if (parameters.distanceToAffectorCenterSqr < arrivedRadiusSqr)
+			{
+				Vector3 result = default(Vector3);
+				result.x = 0f;
+				result.y = 0f;
+				result.z = 0f;
+				return result;
+			}
+			if (parameters.distanceToAffectorCenterSqr < arrivalRadiusSqr)
+			{
+				float num = 1f - parameters.distanceToAffectorCenterSqr / arrivalRadiusSqr;
+				return Vector3.Normalize(parameters.scaledDirectionToAffectorCenter) * num;
+			}
+			return Vector3.Normalize(parameters.scaledDirectionToAffectorCenter);
 		}
-		return Vector3.Normalize(parameters.scaledDirectionToAffectorCenter);
 	}
 }

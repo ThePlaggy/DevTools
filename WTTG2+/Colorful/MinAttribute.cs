@@ -1,13 +1,15 @@
 using UnityEngine;
 
-namespace Colorful;
-
-public sealed class MinAttribute : PropertyAttribute
+namespace Colorful
 {
-	public readonly float Min;
 
-	public MinAttribute(float min)
+	public sealed class MinAttribute : PropertyAttribute
 	{
-		Min = min;
+		public readonly float Min;
+
+		public MinAttribute(float min)
+		{
+			Min = min;
+		}
 	}
 }

@@ -1,13 +1,15 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class ExceptionEventArgs : EventArgs
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public Exception Exception { get; private set; }
 
-	internal ExceptionEventArgs(Exception exception)
+	public class ExceptionEventArgs : EventArgs
 	{
-		Exception = exception;
+		public Exception Exception { get; private set; }
+
+		internal ExceptionEventArgs(Exception exception)
+		{
+			Exception = exception;
+		}
 	}
 }

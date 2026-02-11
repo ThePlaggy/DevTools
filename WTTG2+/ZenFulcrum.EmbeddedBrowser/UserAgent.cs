@@ -3,30 +3,32 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class UserAgent
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	private static string agentOverride;
 
-	public static string GetUserAgent()
+	public class UserAgent
 	{
-		if (agentOverride != null)
-		{
-			return agentOverride;
-		}
-		string text = Marshal.PtrToStringAnsi(BrowserNative.zfb_getVersion());
-		string text2 = "Windows NT 6.1";
-		string input = "Mozilla/5.0 (" + text2 + "; Unity 3D; ZFBrowser 1.1.0; " + Application.productName + " " + Application.version + ") AppleWebKit/537.36 (KHTML, like Gecko) Chrome/" + text + " Safari/537.36";
-		return Regex.Replace(input, "[^\\u0020-\\u007E]", "?");
-	}
+		private static string agentOverride;
 
-	public static void SetUserAgent(string userAgent)
-	{
-		if (BrowserNative.NativeLoaded)
+		public static string GetUserAgent()
 		{
-			throw new InvalidOperationException("User Agent can only be changed before native backend is initialized.");
+			if (agentOverride != null)
+			{
+				return agentOverride;
+			}
+			string text = Marshal.PtrToStringAnsi(BrowserNative.zfb_getVersion());
+			string text2 = "Windows NT 6.1";
+			string input = "Mozilla/5.0 (" + text2 + "; Unity 3D; ZFBrowser 1.1.0; " + Application.productName + " " + Application.version + ") AppleWebKit/537.36 (KHTML, like Gecko) Chrome/" + text + " Safari/537.36";
+			return Regex.Replace(input, "[^\\u0020-\\u007E]", "?");
 		}
-		agentOverride = userAgent;
+
+		public static void SetUserAgent(string userAgent)
+		{
+			if (BrowserNative.NativeLoaded)
+			{
+				throw new InvalidOperationException("User Agent can only be changed before native backend is initialized.");
+			}
+			agentOverride = userAgent;
+		}
 	}
 }

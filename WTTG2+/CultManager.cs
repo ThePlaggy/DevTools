@@ -263,32 +263,39 @@ public class CultManager : MonoBehaviour
 		});
 	}
 
-	private void powerWentOff()
-	{
-		if (powerOffAttackModeActivated && !EnemyStateManager.IsInEnemyStateOrLocked() && darkSpawnLookUp.ContainsKey(StateManager.PlayerLocation))
-		{
-			int num = Random.Range(0, 10);
-			if (keyDiscoveryCount switch
-			{
-				4 => num < 5, 
-				5 => num < 6, 
-				6 => num < 6, 
-				7 => num < 8, 
-				8 => num < 9, 
-				_ => num < 3, 
-			} || DifficultyManager.Nightmare)
-			{
-				EnemyStateManager.AddEnemyState(ENEMY_STATE.CULT);
-				PowerStateManager.AddPowerStateLock(STATE_LOCK_OCCASION.CULT);
-				DataManager.LockSave = true;
-				List<CultSpawnDefinition> list = darkSpawnLookUp[StateManager.PlayerLocation];
-				int index = Random.Range(0, list.Count);
-				list[index].InvokeSpawnEvent();
-			}
-		}
-	}
+    private void powerWentOff()
+    {
+        if (powerOffAttackModeActivated &&
+            !EnemyStateManager.IsInEnemyStateOrLocked() &&
+            darkSpawnLookUp.ContainsKey(StateManager.PlayerLocation))
+        {
+            int num = Random.Range(0, 10);
+            bool cond;
 
-	private void forceActivateNormalSpawns()
+            switch (keyDiscoveryCount)
+            {
+                case 4: cond = num < 5; break;
+                case 5:
+                case 6: cond = num < 6; break;
+                case 7: cond = num < 8; break;
+                case 8: cond = num < 9; break;
+                default: cond = num < 3; break;
+            }
+
+            if (cond || DifficultyManager.Nightmare)
+            {
+                EnemyStateManager.AddEnemyState(ENEMY_STATE.CULT);
+                PowerStateManager.AddPowerStateLock(STATE_LOCK_OCCASION.CULT);
+                DataManager.LockSave = true;
+
+                List<CultSpawnDefinition> list = darkSpawnLookUp[StateManager.PlayerLocation];
+                int index = Random.Range(0, list.Count);
+                list[index].InvokeSpawnEvent();
+            }
+        }
+    }
+
+    private void forceActivateNormalSpawns()
 	{
 		normalSpawnActivated = true;
 		generateNormalSpawnWindow();

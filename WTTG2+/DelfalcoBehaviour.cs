@@ -854,50 +854,77 @@ public class DelfalcoBehaviour : MonoBehaviour
 		StageBehindJump();
 	}
 
-	private void pickPatrolSpot()
-	{
-		myAnimator.SetBool("LookAround", value: false);
-		currentSpots++;
-		if (currentSpots >= maxSpots)
-		{
-			PrepareToWalkOut();
-			return;
-		}
-		myAnimator.SetBool("Walk", value: true);
-		bool flag = true;
-		while (flag)
-		{
-			PatrolPointDefinition patrolPointDefinition = HitmanPatrolBehaviour.Ins.mainRoomPatrolPoints[UnityEngine.Random.Range(0, HitmanPatrolBehaviour.Ins.mainRoomPatrolPoints.Length)];
-			if (patrolPointDefinition != previousPatrolPoint)
-			{
-				flag = false;
-				previousPatrolPoint = patrolPointDefinition;
-			}
-		}
-		myAgent.destination = previousPatrolPoint.Position;
-		destInProgress = true;
-		destinationReached = delegate
-		{
-			destInProgress = false;
-			myAnimator.SetBool("Walk", value: false);
-			myAnimator.SetBool("LookAround", value: true);
-			int num = UnityEngine.Random.Range(0, 100);
-			if (num < 10)
-			{
-				AudioFileDefinition audioFile = UnityEngine.Random.Range(0, 4) switch
-				{
-					1 => CustomSoundLookUp.delfalcoPatrolVoice2, 
-					2 => CustomSoundLookUp.delfalcoPatrolVoice3, 
-					3 => CustomSoundLookUp.delfalcoPatrolVoice4, 
-					_ => CustomSoundLookUp.delfalcoPatrolVoice1, 
-				};
-				myAho.PlaySound(audioFile);
-			}
-			GameManager.TimeSlinger.FireTimer(UnityEngine.Random.Range(3, 6), pickPatrolSpot);
-		};
-	}
+    private void pickPatrolSpot()
+    {
+        myAnimator.SetBool("LookAround", false);
+        currentSpots++;
 
-	private void PrepareToWalkOut()
+        if (currentSpots >= maxSpots)
+        {
+            PrepareToWalkOut();
+            return;
+        }
+
+        myAnimator.SetBool("Walk", true);
+
+        bool flag = true;
+        while (flag)
+        {
+            PatrolPointDefinition p =
+                HitmanPatrolBehaviour.Ins.mainRoomPatrolPoints[
+                    UnityEngine.Random.Range(0, HitmanPatrolBehaviour.Ins.mainRoomPatrolPoints.Length)
+                ];
+
+            if (p != previousPatrolPoint)
+            {
+                previousPatrolPoint = p;
+                flag = false;
+            }
+        }
+
+        myAgent.destination = previousPatrolPoint.Position;
+        destInProgress = true;
+
+        destinationReached = delegate
+        {
+            destInProgress = false;
+            myAnimator.SetBool("Walk", false);
+            myAnimator.SetBool("LookAround", true);
+
+            int num = UnityEngine.Random.Range(0, 100);
+            if (num < 10)
+            {
+                int r = UnityEngine.Random.Range(0, 4);
+                AudioFileDefinition audioFile;
+
+                switch (r)
+                {
+                    case 1:
+                        audioFile = CustomSoundLookUp.delfalcoPatrolVoice2;
+                        break;
+                    case 2:
+                        audioFile = CustomSoundLookUp.delfalcoPatrolVoice3;
+                        break;
+                    case 3:
+                        audioFile = CustomSoundLookUp.delfalcoPatrolVoice4;
+                        break;
+                    default:
+                        audioFile = CustomSoundLookUp.delfalcoPatrolVoice1;
+                        break;
+                }
+
+                myAho.PlaySound(audioFile);
+            }
+
+            GameManager.TimeSlinger.FireTimer(
+                UnityEngine.Random.Range(3, 6),
+                pickPatrolSpot
+            );
+        };
+    }
+
+
+    private void PrepareToWalkOut()
 	{
 		myAnimator.SetBool("Walk", value: true);
 		destInProgress = true;

@@ -1,7 +1,9 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class InvalidJSONNodeException : Exception
+namespace ZenFulcrum.EmbeddedBrowser
 {
+
+    public class InvalidJSONNodeException : Exception
+    {
+    }
 }

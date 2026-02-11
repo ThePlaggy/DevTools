@@ -120,20 +120,36 @@ public class BreatherManager : MonoBehaviour
 		{
 			int num = Random.Range(0, 100);
 			num -= SwanAdded;
-			flag = keyDiscoveryCount switch
-			{
-				0 => num < 35, 
-				1 => num < 35, 
-				2 => num < 40, 
-				3 => num < 45, 
-				4 => num < 50, 
-				5 => num < 55, 
-				6 => num < 60, 
-				7 => num < 65, 
-				8 => num < 90, 
-				_ => num < 90, 
-			};
-			if (DifficultyManager.Nightmare)
+            switch (keyDiscoveryCount)
+            {
+                case 0:
+                case 1:
+                    flag = num < 35;
+                    break;
+                case 2:
+                    flag = num < 40;
+                    break;
+                case 3:
+                    flag = num < 45;
+                    break;
+                case 4:
+                    flag = num < 50;
+                    break;
+                case 5:
+                    flag = num < 55;
+                    break;
+                case 6:
+                    flag = num < 60;
+                    break;
+                case 7:
+                    flag = num < 65;
+                    break;
+                case 8:
+                default:
+                    flag = num < 90;
+                    break;
+            }
+            if (DifficultyManager.Nightmare)
 			{
 				flag = num < 95;
 			}

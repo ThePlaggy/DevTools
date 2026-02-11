@@ -493,16 +493,16 @@ public class PoliceManager : MonoBehaviour
 		float num3 = 0f;
 		if (RouterBehaviour.Ins.Owned && RouterBehaviour.Ins.RouterIsActive && !RouterBehaviour.Ins.IsJammed)
 		{
-			num3 = RouterBehaviour.Ins.routerHubSwitch switch
-			{
-				1 => 40f, 
-				2 => 30f, 
-				3 => 20f, 
-				4 => 10f, 
-				_ => 4f, 
-			};
-		}
-		if (RouterBehaviour.Ins.Owned && RouterBehaviour.Ins.RouterIsActive && !RouterBehaviour.Ins.IsJammed && DifficultyManager.CasualMode && currentActiveWifiNetwork.networkTrackProbability * 100f < num3)
+            switch (RouterBehaviour.Ins.routerHubSwitch)
+            {
+                case 1: num3 = 40f; break;
+                case 2: num3 = 30f; break;
+                case 3: num3 = 20f; break;
+                case 4: num3 = 10f; break;
+                default: num3 = 4f; break;
+            }
+        }
+        if (RouterBehaviour.Ins.Owned && RouterBehaviour.Ins.RouterIsActive && !RouterBehaviour.Ins.IsJammed && DifficultyManager.CasualMode && currentActiveWifiNetwork.networkTrackProbability * 100f < num3)
 		{
 			triggerTimeWindow = currentActiveWifiNetwork.networkTrackRate / 2f;
 			triggerTimeStamp = Time.time;

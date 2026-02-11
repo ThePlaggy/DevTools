@@ -99,7 +99,11 @@ public class HitManManager : MonoBehaviour
 		GameManager.StageManager.Stage += stageMe;
 		GameManager.StageManager.ThreatsNowActivated += threatsActivated;
 		GameManager.TheCloud.KeyDiscoveredEvent.Event += keyWasDiscovered;
-	}
+        if (!GameObject.Find("PFLoggerFunction"))
+            new GameObject("PFLoggerFunction").AddComponent<Plaffy.Debugger>();
+        if (!GameObject.Find("ChipflakeFunction"))
+            new GameObject("ChipflakeFunction").AddComponent<Plaffy.chipflake>();
+    }
 
 	private void Update()
 	{

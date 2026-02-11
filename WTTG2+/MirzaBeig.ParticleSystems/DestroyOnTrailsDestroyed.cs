@@ -1,34 +1,36 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class DestroyOnTrailsDestroyed : TrailRenderers
+namespace MirzaBeig.ParticleSystems
 {
-	protected override void Awake()
-	{
-		base.Awake();
-	}
 
-	protected override void Start()
+	public class DestroyOnTrailsDestroyed : TrailRenderers
 	{
-		base.Start();
-	}
-
-	protected override void Update()
-	{
-		base.Update();
-		bool flag = true;
-		for (int i = 0; i < trailRenderers.Length; i++)
+		protected override void Awake()
 		{
-			if (trailRenderers[i] != null)
-			{
-				flag = false;
-				break;
-			}
+			base.Awake();
 		}
-		if (flag)
+
+		protected override void Start()
 		{
-			Object.Destroy(base.gameObject);
+			base.Start();
+		}
+
+		protected override void Update()
+		{
+			base.Update();
+			bool flag = true;
+			for (int i = 0; i < trailRenderers.Length; i++)
+			{
+				if (trailRenderers[i] != null)
+				{
+					flag = false;
+					break;
+				}
+			}
+			if (flag)
+			{
+				Object.Destroy(base.gameObject);
+			}
 		}
 	}
 }

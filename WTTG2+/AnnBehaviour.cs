@@ -135,15 +135,25 @@ public class AnnBehaviour : WindowBehaviour
 		}
 		if (RouterBehaviour.Ins.Owned && RouterBehaviour.Ins.RouterIsActive)
 		{
-			num = RouterBehaviour.Ins.routerHubSwitch switch
-			{
-				1 => num / 0.5f, 
-				2 => num / 1f, 
-				3 => num / 1.5f, 
-				4 => num / 2f, 
-				_ => num / 0.1f, 
-			};
-			if (RouterBehaviour.Ins.IsJammed)
+            switch (RouterBehaviour.Ins.routerHubSwitch)
+            {
+                case 1:
+                    num = num / 0.5f;
+                    break;
+                case 2:
+                    num = num / 1f;
+                    break;
+                case 3:
+                    num = num / 1.5f;
+                    break;
+                case 4:
+                    num = num / 2f;
+                    break;
+                default:
+                    num = num / 0.1f;
+                    break;
+            }
+            if (RouterBehaviour.Ins.IsJammed)
 			{
 				num = 45f;
 			}

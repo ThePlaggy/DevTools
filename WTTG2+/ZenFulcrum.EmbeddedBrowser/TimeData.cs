@@ -1,8 +1,10 @@
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public struct TimeData
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public float elapsedTime;
 
-	public float deltaTime;
+	public struct TimeData
+	{
+		public float elapsedTime;
+
+		public float deltaTime;
+	}
 }

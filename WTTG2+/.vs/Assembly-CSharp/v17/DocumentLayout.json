@@ -1,12 +1,155 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\assetbundlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assetbundlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\plaffy\\chipflake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:plaffy\\chipflake.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\hitmanmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:hitmanmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\titlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:titlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\plaffy\\debugger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:plaffy\\debugger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\afdmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:afdmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\bundle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:bundle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\programmier zeugs\\unity engine\\wttg2\u002B\\enemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:enemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HitManManager.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\HitManManager.cs",
+              "RelativeDocumentMoniker": "HitManManager.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\HitManManager.cs",
+              "RelativeToolTip": "HitManManager.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAEwGgAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T16:18:09.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BUNDLE.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\BUNDLE.cs",
+              "RelativeDocumentMoniker": "BUNDLE.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\BUNDLE.cs",
+              "RelativeToolTip": "BUNDLE.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T02:35:29.745Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AssetBundleManager.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\AssetBundleManager.cs",
+              "RelativeDocumentMoniker": "AssetBundleManager.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\AssetBundleManager.cs",
+              "RelativeToolTip": "AssetBundleManager.cs",
+              "ViewState": "AgIAAKsDAAAAAAAAAAAEwLYDAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T02:34:23.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AFDManager.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\AFDManager.cs",
+              "RelativeDocumentMoniker": "AFDManager.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\AFDManager.cs",
+              "RelativeToolTip": "AFDManager.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T02:34:07.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EnemyManager.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\EnemyManager.cs",
+              "RelativeDocumentMoniker": "EnemyManager.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\EnemyManager.cs",
+              "RelativeToolTip": "EnemyManager.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAswGkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T02:26:09.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "chipflake.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\Plaffy\\chipflake.cs",
+              "RelativeDocumentMoniker": "Plaffy\\chipflake.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\Plaffy\\chipflake.cs",
+              "RelativeToolTip": "Plaffy\\chipflake.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAlwFgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T02:22:35.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Debugger.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\Plaffy\\Debugger.cs",
+              "RelativeDocumentMoniker": "Plaffy\\Debugger.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\Plaffy\\Debugger.cs",
+              "RelativeToolTip": "Plaffy\\Debugger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T01:31:21.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TitleManager.cs",
+              "DocumentMoniker": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\TitleManager.cs",
+              "RelativeDocumentMoniker": "TitleManager.cs",
+              "ToolTip": "D:\\Programmier Zeugs\\Unity Engine\\WTTG2\u002B\\TitleManager.cs",
+              "RelativeToolTip": "TitleManager.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAA5wEsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-08T07:18:57.913Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

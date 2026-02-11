@@ -1,49 +1,51 @@
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public static class FileLocations
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public class CEFDirs
+
+	public static class FileLocations
 	{
-		public string binariesPath;
-
-		public string localesPath;
-
-		public string logFile;
-
-		public string resourcesPath;
-
-		public string subprocessFile;
-	}
-
-	public const string SlaveExecutable = "ZFGameBrowser";
-
-	private static CEFDirs _dirs;
-
-	public static CEFDirs Dirs
-	{
-		get
+		public class CEFDirs
 		{
-			CEFDirs result;
-			if ((result = _dirs) == null)
-			{
-				result = (_dirs = GetCEFDirs());
-			}
-			return result;
+			public string binariesPath;
+
+			public string localesPath;
+
+			public string logFile;
+
+			public string resourcesPath;
+
+			public string subprocessFile;
 		}
-	}
 
-	private static CEFDirs GetCEFDirs()
-	{
-		string text = Application.dataPath + "/Plugins";
-		return new CEFDirs
+		public const string SlaveExecutable = "ZFGameBrowser";
+
+		private static CEFDirs _dirs;
+
+		public static CEFDirs Dirs
 		{
-			resourcesPath = text,
-			binariesPath = Application.dataPath + "/../",
-			localesPath = text + "/locales",
-			subprocessFile = text + "/ZFGameBrowser.exe",
-			logFile = Application.dataPath + "/output_log.txt"
-		};
+			get
+			{
+				CEFDirs result;
+				if ((result = _dirs) == null)
+				{
+					result = (_dirs = GetCEFDirs());
+				}
+				return result;
+			}
+		}
+
+		private static CEFDirs GetCEFDirs()
+		{
+			string text = Application.dataPath + "/Plugins";
+			return new CEFDirs
+			{
+				resourcesPath = text,
+				binariesPath = Application.dataPath + "/../",
+				localesPath = text + "/locales",
+				subprocessFile = text + "/ZFGameBrowser.exe",
+				logFile = Application.dataPath + "/output_log.txt"
+			};
+		}
 	}
 }

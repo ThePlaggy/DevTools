@@ -1,24 +1,26 @@
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public static class Util
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public static bool SafeStartsWith(this string check, string starter)
+
+	public static class Util
 	{
-		if (check == null || starter == null)
+		public static bool SafeStartsWith(this string check, string starter)
 		{
-			return false;
-		}
-		if (check.Length < starter.Length)
-		{
-			return false;
-		}
-		for (int i = 0; i < starter.Length; i++)
-		{
-			if (check[i] != starter[i])
+			if (check == null || starter == null)
 			{
 				return false;
 			}
+			if (check.Length < starter.Length)
+			{
+				return false;
+			}
+			for (int i = 0; i < starter.Length; i++)
+			{
+				if (check[i] != starter[i])
+				{
+					return false;
+				}
+			}
+			return true;
 		}
-		return true;
 	}
 }

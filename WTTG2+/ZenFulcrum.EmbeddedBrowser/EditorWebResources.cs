@@ -2,30 +2,32 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-internal class EditorWebResources : WebResources
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	protected string basePath;
 
-	public EditorWebResources()
+	internal class EditorWebResources : WebResources
 	{
-		basePath = Path.GetDirectoryName(Application.dataPath) + "/BrowserAssets";
-	}
+		protected string basePath;
 
-	public override byte[] GetData(string path)
-	{
-		try
+		public EditorWebResources()
 		{
-			return File.ReadAllBytes(basePath + path);
+			basePath = Path.GetDirectoryName(Application.dataPath) + "/BrowserAssets";
 		}
-		catch (Exception ex)
+
+		public override byte[] GetData(string path)
 		{
-			if (!(ex is FileNotFoundException) && !(ex is DirectoryNotFoundException))
+			try
 			{
-				throw;
+				return File.ReadAllBytes(basePath + path);
 			}
-			return null;
+			catch (Exception ex)
+			{
+				if (!(ex is FileNotFoundException) && !(ex is DirectoryNotFoundException))
+				{
+					throw;
+				}
+				return null;
+			}
 		}
 	}
 }

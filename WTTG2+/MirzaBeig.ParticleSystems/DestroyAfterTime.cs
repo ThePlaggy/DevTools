@@ -1,13 +1,15 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class DestroyAfterTime : MonoBehaviour
+namespace MirzaBeig.ParticleSystems
 {
-	public float time = 2f;
 
-	private void Start()
+	public class DestroyAfterTime : MonoBehaviour
 	{
-		Object.Destroy(base.gameObject, time);
+		public float time = 2f;
+
+		private void Start()
+		{
+			Object.Destroy(base.gameObject, time);
+		}
 	}
 }

@@ -1,11 +1,13 @@
 using System;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-[Flags]
-public enum MouseButton
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	Left = 1,
-	Middle = 2,
-	Right = 4
+
+	[Flags]
+	public enum MouseButton
+	{
+		Left = 1,
+		Middle = 2,
+		Right = 4
+	}
 }

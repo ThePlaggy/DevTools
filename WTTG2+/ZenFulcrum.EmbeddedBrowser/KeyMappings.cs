@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-internal static class KeyMappings
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	private static Dictionary<KeyCode, int> mappings = new Dictionary<KeyCode, int>
+
+	internal static class KeyMappings
+	{
+		private static Dictionary<KeyCode, int> mappings = new Dictionary<KeyCode, int>
 	{
 		{
 			KeyCode.Escape,
@@ -333,26 +334,27 @@ internal static class KeyMappings
 		}
 	};
 
-	public static int GetWindowsKeyCode(Event ev)
-	{
-		int keyCode = (int)ev.keyCode;
-		if (keyCode == 0)
+		public static int GetWindowsKeyCode(Event ev)
 		{
-			if (ev.character == '\n')
+			int keyCode = (int)ev.keyCode;
+			if (keyCode == 0)
 			{
-				return 13;
+				if (ev.character == '\n')
+				{
+					return 13;
+				}
+				return ev.character;
 			}
-			return ev.character;
+			if (keyCode >= 97 && keyCode <= 122)
+			{
+				return keyCode - 97 + 65;
+			}
+			if (mappings.TryGetValue(ev.keyCode, out var value))
+			{
+				return value;
+			}
+			Debug.LogWarning("Unknown key mapping: " + ev);
+			return keyCode;
 		}
-		if (keyCode >= 97 && keyCode <= 122)
-		{
-			return keyCode - 97 + 65;
-		}
-		if (mappings.TryGetValue(ev.keyCode, out var value))
-		{
-			return value;
-		}
-		Debug.LogWarning("Unknown key mapping: " + ev);
-		return keyCode;
 	}
 }

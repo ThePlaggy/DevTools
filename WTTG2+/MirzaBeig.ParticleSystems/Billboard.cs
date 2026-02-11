@@ -1,11 +1,13 @@
 using UnityEngine;
 
-namespace MirzaBeig.ParticleSystems;
-
-public class Billboard : MonoBehaviour
+namespace MirzaBeig.ParticleSystems
 {
-	private void LateUpdate()
+
+	public class Billboard : MonoBehaviour
 	{
-		base.transform.LookAt(Camera.main.transform.position);
+		private void LateUpdate()
+		{
+			base.transform.LookAt(Camera.main.transform.position);
+		}
 	}
 }

@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class FlagsFieldAttribute : PropertyAttribute
+namespace ZenFulcrum.EmbeddedBrowser
 {
+
+    public class FlagsFieldAttribute : PropertyAttribute
+    {
+    }
 }

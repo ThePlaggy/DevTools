@@ -1,11 +1,13 @@
 using UnityEngine;
 
-namespace DG.Tweening;
-
-public static class DOTweenAnimationExtensions
+namespace DG.Tweening
 {
-	public static bool IsSameOrSubclassOf<T>(this Component t)
+
+	public static class DOTweenAnimationExtensions
 	{
-		return t is T;
+		public static bool IsSameOrSubclassOf<T>(this Component t)
+		{
+			return t is T;
+		}
 	}
 }

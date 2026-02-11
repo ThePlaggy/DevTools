@@ -1,10 +1,12 @@
-namespace ZenFulcrum.EmbeddedBrowser;
-
-public class BrowserInputSettings
+namespace ZenFulcrum.EmbeddedBrowser
 {
-	public float multiclickSpeed = 0.7f;
 
-	public float multiclickTolerance = 6f;
+	public class BrowserInputSettings
+	{
+		public float multiclickSpeed = 0.7f;
 
-	public int scrollSpeed = 120;
+		public float multiclickTolerance = 6f;
+
+		public int scrollSpeed = 120;
+	}
 }
